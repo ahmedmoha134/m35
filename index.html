@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#04182e">
+<title>غواصة التاء — رحلة كنز الأعماق</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700;800&family=Marhey:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abyss:#04182e;--deep:#06304f;--mid:#0a4a6e;--aqua:#12a3c4;--foam:#dff6ff;
+  --bio:#35f0e0;--bio2:#4dffd2;--coral:#ff4f8b;--coral-d:#c22a63;
+  --sub:#ffcf4a;--sub-d:#e09a12;--sub-dd:#8a5a14;
+  --gold:#ffc23c;--gold-l:#ffe9a8;--brass:#c98a2e;
+  --pearl:#fdfbff;--sand:#f4e4c1;--sand-d:#d9c096;--ink:#062033;
+  --ok:#3fe08a;--ok-d:#1c8a52;--warn:#ffb020;--bad:#ff5c5c;--info:#35d0e0;
+  --dim:#7fa6bd;--steel:#2b5a7a;--steel-d:#173d57;
+  --seaA:#1aa8c8;--seaB:#0a5a86;--seaC:#052a48;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scrollbar-color:var(--aqua) var(--abyss);scrollbar-width:thin}
+body{
+  font-family:'Baloo Bhaijaan 2','Segoe UI',Tahoma,sans-serif;color:var(--foam);
+  background:linear-gradient(180deg,#0d7fa8 0%,#0a5a86 26%,#06304f 58%,#04182e 82%,#0a0f2a 100%) fixed;
+  min-height:100dvh;overflow-x:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none;
+}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--abyss);border-radius:8px}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--bio),var(--aqua));border-radius:8px;border:3px solid var(--abyss)}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(var(--bio2),var(--bio))}
+[role=button]{cursor:pointer}
+[role=button]:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--bio);outline-offset:2px}
+button{font-family:inherit}
+
+/* ===== محيط البحر ===== */
+.bg-stack{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.godrays{position:absolute;top:-10%;left:0;right:0;height:70%;
+  background:repeating-linear-gradient(100deg,transparent 0 60px,rgba(180,255,250,.09) 60px 110px,transparent 110px 200px);
+  filter:blur(3px);animation:rayShift 18s ease-in-out infinite alternate;transform-origin:top center}
+@keyframes rayShift{from{transform:translateX(-40px) skewX(-2deg)}to{transform:translateX(50px) skewX(3deg)}}
+.glowblob{position:absolute;border-radius:50%;filter:blur(70px);mix-blend-mode:screen}
+.gb1{width:420px;height:420px;top:-120px;right:-100px;background:radial-gradient(circle,#35f0e0,transparent 70%);opacity:.28;animation:drift1 30s ease-in-out infinite alternate}
+.gb2{width:380px;height:380px;bottom:-140px;left:-90px;background:radial-gradient(circle,#ff4f8b,transparent 70%);opacity:.2;animation:drift2 38s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(-70px,60px) scale(1.15)}}
+@keyframes drift2{to{transform:translate(80px,-60px) scale(1.1)}}
+#bgcv{position:absolute;inset:0}
+.reef{position:absolute;bottom:0;left:0;right:0;height:26vh;min-height:170px}
+.reef svg{width:100%;height:100%;display:block}
+.grain{position:fixed;inset:0;z-index:35;pointer-events:none;opacity:.055;background-size:170px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='170' height='170' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E")}
+
+#app{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column}
+
+/* ===== الشريط العلوي ===== */
+header{position:sticky;top:0;z-index:30;background:rgba(4,24,46,.9);backdrop-filter:blur(8px);border-bottom:3px solid var(--steel);box-shadow:0 4px 20px rgba(0,0,0,.45)}
+.hud-in{max-width:1220px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:8px 16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:9px}
+.logo svg{width:42px;height:26px}
+.logo b{font-family:'Marhey';font-weight:700;font-size:19px;color:var(--sub);white-space:nowrap;text-shadow:0 0 14px rgba(255,207,74,.45)}
+.logo small{display:block;font-size:11px;color:var(--bio);font-weight:700;line-height:1;margin-top:-3px}
+.pips{display:flex;gap:8px;flex:1;justify-content:center;flex-wrap:wrap}
+.pip{display:flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;border:2px solid var(--steel);color:var(--dim);font-weight:700;font-size:13px;background:rgba(0,0,0,.28);transition:.3s}
+.pip .n{width:22px;height:22px;border-radius:50%;background:var(--steel);color:#fff;display:grid;place-items:center;font-size:13px;flex:none}
+.pip.active{border-color:var(--bio);color:var(--bio);box-shadow:0 0 12px rgba(53,240,224,.35)}
+.pip.active .n{background:var(--bio);color:#04202a}
+.pip.done{border-color:var(--ok);color:var(--ok)}
+.pip.done .n{background:var(--ok);color:#04240f}
+.hud-ctrl{display:flex;align-items:center;gap:8px}
+.pearls{display:flex;align-items:center;gap:6px;background:rgba(253,251,255,.12);border:2px solid var(--pearl);padding:5px 12px;border-radius:999px;color:var(--pearl);font-weight:800;font-size:17px}
+.pearls svg{width:20px;height:20px}
+.pearls.pop{animation:popScale .35s}
+@keyframes popScale{40%{transform:scale(1.2)}}
+.hbtn{display:flex;gap:6px;align-items:center;background:rgba(255,255,255,.06);border:2px solid var(--steel);color:var(--bio);border-radius:12px;padding:6px 12px;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+.hbtn:hover{border-color:var(--bio);background:rgba(53,240,224,.12);transform:translateY(-1px)}
+.hbtn svg{width:18px;height:18px;flex:none}
+.hbtn.muted{color:var(--dim);border-color:var(--steel-d)}
+
+/* ===== المسرح ===== */
+main{flex:1;width:100%;max-width:1120px;margin:0 auto;padding:18px 14px 26px;display:flex;flex-direction:column;align-items:center}
+#stage{width:100%;display:flex;flex-direction:column;align-items:center;gap:16px}
+#stage.shake{animation:shakeX .45s}
+@keyframes shakeX{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.stage-head{text-align:center;animation:riseIn .5s both}
+.stage-chip{display:inline-block;background:rgba(53,240,224,.12);border:2px solid var(--bio);color:var(--bio);border-radius:999px;padding:3px 16px;font-weight:700;font-size:14px}
+.stage-title{font-family:'Marhey';font-weight:700;font-size:clamp(25px,4.8vw,38px);color:var(--sub);text-shadow:0 0 18px rgba(255,207,74,.4),0 3px 0 rgba(0,0,0,.45);margin:4px 0 2px;line-height:1.25}
+.stage-obj{color:#bfe6f5;font-weight:600;font-size:clamp(14px,2.6vw,17px);max-width:680px;margin:0 auto}
+.target-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,194,60,.12);border:2px dashed var(--gold);border-radius:999px;padding:3px 14px;font-weight:700;color:var(--gold-l);margin-top:7px}
+.target-chip b{font-size:26px;color:var(--gold);line-height:1}
+
+/* ===== نافذة البحر ===== */
+.sea-row{display:flex;gap:12px;width:100%;max-width:1000px;align-items:stretch;animation:riseIn .6s .08s both}
+.sea{position:relative;flex:1;min-width:0;border:4px solid var(--steel);border-radius:24px;overflow:hidden;padding:14px 14px 46px;
+  background:linear-gradient(180deg,var(--seaA),var(--seaB) 48%,var(--seaC));
+  box-shadow:0 0 0 3px var(--steel-d),0 24px 50px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.14);
+  transition:background 1.6s ease}
+.sea[data-depth="2"]{--seaA:#0e8fb4;--seaB:#075178;--seaC:#04223c}
+.sea[data-depth="3"]{--seaA:#0a6c96;--seaB:#053a5e;--seaC:#031a30}
+.sea[data-depth="4"]{--seaA:#0a4a78;--seaB:#0a2450;--seaC:#0a0f2e}
+.caustics{position:absolute;inset:0;opacity:.16;pointer-events:none;
+  background:repeating-linear-gradient(72deg,transparent 0 26px,rgba(200,255,252,.5) 26px 30px,transparent 30px 64px),
+             repeating-linear-gradient(-64deg,transparent 0 34px,rgba(200,255,252,.35) 34px 37px,transparent 37px 78px);
+  animation:causticMove 14s linear infinite}
+@keyframes causticMove{to{background-position:120px 60px,-140px 80px}}
+.sea-bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sbub{position:absolute;bottom:-30px;border-radius:50%;border:1.5px solid rgba(223,246,255,.6);background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(223,246,255,.08));animation:riseBub linear infinite}
+@keyframes riseBub{0%{transform:translateY(0) translateX(0);opacity:0}12%{opacity:.8}100%{transform:translateY(-560px) translateX(24px);opacity:0}}
+.seafloor{position:absolute;bottom:0;left:0;right:0;height:56px;pointer-events:none}
+.seafloor svg{width:100%;height:100%;display:block}
+.sea-inner{position:relative;z-index:2}
+
+/* الغواصة */
+.sea-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.sub-wrap{position:relative;width:230px;flex:none}
+.sub-svg{width:100%;display:block;overflow:visible}
+.sub-all{animation:subBob 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes subBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+.sub-wrap.diving .sub-all{animation:subDive 2.4s cubic-bezier(.4,0,.5,1)}
+@keyframes subDive{0%{transform:translateY(0) rotate(-1deg)}35%{transform:translateY(14px) rotate(7deg)}100%{transform:translateY(0) rotate(-1deg)}}
+.prop{transform-box:view-box;transform-origin:34px 78px}
+.sub-wrap.powered .prop{animation:spin .35s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sub-lamp{opacity:.18;transition:opacity .6s}
+.sub-wrap.powered .sub-lamp{opacity:1}
+.sub-beam{opacity:0;transition:opacity .8s}
+.sub-wrap.powered .sub-beam{opacity:.55;animation:beamFlicker 3.4s ease-in-out infinite}
+@keyframes beamFlicker{50%{opacity:.34}}
+.sub-glow{opacity:0;transition:opacity .7s}
+.sub-wrap.powered .sub-glow{opacity:1}
+.diver-hand{transform-box:fill-box;transform-origin:bottom center;animation:waveHand 2.6s ease-in-out infinite}
+@keyframes waveHand{50%{transform:rotate(-22deg)}}
+.sub-status{flex:1;min-width:180px;display:flex;flex-direction:column;gap:6px}
+.status-line{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#cfeeff}
+.status-dot{width:12px;height:12px;border-radius:50%;background:var(--bad);box-shadow:0 0 8px var(--bad);flex:none}
+.status-dot.on{background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.depth-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(4,24,46,.6);border:2px solid var(--bio);color:var(--bio);border-radius:999px;padding:3px 14px;font-weight:800;font-size:15px;width:max-content}
+.sonar{position:relative;width:34px;height:34px;border-radius:50%;border:2px solid var(--bio);flex:none;overflow:hidden;background:rgba(4,24,46,.5)}
+.sonar::after{content:'';position:absolute;inset:0;background:conic-gradient(from 0deg,rgba(53,240,224,.55),transparent 40%);animation:spin 3.4s linear infinite}
+.sonar.ping{animation:sonarPing .8s ease-out}
+@keyframes sonarPing{0%{box-shadow:0 0 0 0 rgba(53,240,224,.6)}100%{box-shadow:0 0 0 14px rgba(53,240,224,0)}}
+
+/* عمود العمق */
+.depth-rail{width:64px;flex:none;background:rgba(4,24,46,.55);border:3px solid var(--steel);border-radius:18px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.rail-title{font-size:11px;font-weight:800;color:var(--bio);writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:1px}
+.rail-track{position:relative;flex:1;width:12px;border-radius:8px;background:linear-gradient(180deg,#1aa8c8,#052a48);border:1px solid var(--steel);min-height:220px}
+.rail-mark{position:absolute;left:-6px;right:-6px;height:2px;background:rgba(223,246,255,.35)}
+.rail-sub{position:absolute;left:50%;width:30px;height:20px;transform:translate(-50%,-50%);transition:top 1.6s cubic-bezier(.4,0,.4,1);top:0}
+.rail-sub svg{width:100%;height:100%;filter:drop-shadow(0 0 6px rgba(255,207,74,.8))}
+.rail-val{font-size:12px;font-weight:800;color:var(--gold)}
+
+/* ===== المرحلة ١: لوحة التحكم ===== */
+.console{background:linear-gradient(160deg,#2b5a7a,#173d57);border:4px solid var(--brass);border-radius:20px;padding:16px;box-shadow:inset 0 3px 12px rgba(0,0,0,.5),0 8px 0 rgba(0,0,0,.3)}
+.console-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.console-title{font-family:'Marhey';font-weight:700;color:var(--sub);font-size:17px}
+.gauge{display:flex;align-items:center;gap:8px}
+.gauge-bar{width:130px;height:14px;border-radius:8px;background:rgba(4,24,46,.7);border:2px solid var(--steel);overflow:hidden}
+.gauge-fill{height:100%;width:8%;background:linear-gradient(90deg,var(--bad),var(--warn));transition:width 1.4s ease,background .6s}
+.gauge-fill.full{width:100%;background:linear-gradient(90deg,var(--ok),var(--bio))}
+.gauge-lbl{font-size:12px;font-weight:800;color:#cfeeff}
+.letter-pad{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.lkey{position:relative;aspect-ratio:1;display:grid;place-items:center;border-radius:14px;font-weight:800;font-size:clamp(24px,4vw,34px);color:var(--ink);
+  background:linear-gradient(#fdf6e4,#e6d3ac);border:3px solid var(--brass);box-shadow:0 5px 0 var(--sub-dd),inset 0 2px 0 #fff;transition:transform .12s}
+.lkey:hover{transform:translateY(-3px)}
+.lkey:active{transform:translateY(2px);box-shadow:0 2px 0 var(--sub-dd)}
+.lkey.right{background:linear-gradient(var(--bio2),var(--bio));border-color:#0d8a80;box-shadow:0 0 20px rgba(53,240,224,.9),0 5px 0 #0d8a80;color:#04202a;animation:popIn .4s}
+.lkey.right::after{content:'✓';position:absolute;top:-8px;left:-8px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:14px;display:grid;place-items:center;border:2px solid #fff}
+.lkey.wrong{animation:keyWrong .45s}
+@keyframes keyWrong{20%,60%{transform:translateX(-6px);background:#ffd9d9}40%,80%{transform:translateX(6px);background:#ffd9d9}}
+.console-note{text-align:center;color:#bfe6f5;font-weight:700;font-size:14px;margin-top:12px}
+
+/* ===== المرحلة ٢: الأسماك ===== */
+.fish-school{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:6px 2px 10px}
+.fish{position:relative;width:150px;touch-action:manipulation;animation:riseIn .5s both}
+.fish-float{animation:fishBob 3.8s ease-in-out infinite}
+@keyframes fishBob{0%,100%{transform:translate(0,0) rotate(-1deg)}50%{transform:translate(6px,-8px) rotate(1.5deg)}}
+.fish-svg{width:100%;display:block;overflow:visible}
+.fish .tail{transform-box:view-box;transform-origin:38px 40px;animation:tailWag .5s ease-in-out infinite alternate}
+@keyframes tailWag{from{transform:rotate(-11deg)}to{transform:rotate(11deg)}}
+.fish .fin{transform-box:view-box;transform-origin:78px 30px;animation:finWag .8s ease-in-out infinite alternate}
+@keyframes finWag{from{transform:rotate(-6deg)}to{transform:rotate(8deg)}}
+.fish-rope{width:2px;height:10px;background:rgba(223,246,255,.6);margin:0 auto}
+.fish-card{background:var(--sand);border:3px solid var(--brass);border-radius:14px;padding:5px 6px 3px;text-align:center;box-shadow:0 4px 0 var(--sub-dd)}
+.fish-card svg{width:56px;height:56px;display:block;margin:0 auto}
+.fish-word{font-weight:800;font-size:19px;color:var(--ink);line-height:1.2}
+.fish.eaten .fish-card{border-color:var(--ok-d);background:#eafff4}
+.fish.eaten::after{content:'✓';position:absolute;top:-6px;left:8px;width:28px;height:28px;border-radius:50%;background:var(--ok);color:#fff;font-weight:800;font-size:17px;display:grid;place-items:center;border:3px solid #fff;animation:popIn .4s;z-index:3}
+.fish.nope{animation:shakeX .45s}
+.fish.cool{pointer-events:none}
+.fish.perched{width:78px}
+.fish.perched .fish-card,.fish.perched .fish-rope{display:none}
+.fish-perch{position:absolute;width:78px;height:46px;z-index:4}
+.fp1{bottom:-6px;left:6px}.fp2{top:-10px;left:40px}.fp3{bottom:2px;right:-10px}.fp4{top:-14px;right:24px}
+.pellet{position:fixed;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#ffd9a0,#c98a2e);border:2px solid #8a5a14;z-index:55;pointer-events:none}
+
+/* ===== المرحلة ٣: البوابات ===== */
+.word-float{display:flex;justify-content:center;margin-bottom:12px}
+.word-card{display:flex;align-items:center;gap:12px;background:var(--sand);border:4px solid var(--brass);border-radius:18px;padding:10px 16px;box-shadow:0 6px 0 var(--sub-dd),0 0 24px rgba(53,240,224,.25);animation:popIn .45s both}
+.word-card svg{width:74px;height:74px;flex:none}
+.word-card .wtxt{font-weight:800;font-size:clamp(30px,6vw,44px);color:var(--ink);line-height:1.1}
+.word-card .wtxt .taa{color:var(--coral-d);text-shadow:0 0 10px rgba(255,79,139,.5)}
+.word-card .wask{display:block;font-size:13px;font-weight:700;color:#7a5a2a}
+.gates{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.gate{position:relative;text-align:center;cursor:pointer;transition:transform .2s;animation:riseIn .5s both}
+.gate:hover{transform:translateY(-4px)}
+.gate svg{width:100%;display:block;overflow:visible}
+.gate .door-l{transform-box:view-box;transform-origin:38px 110px;transition:transform .7s cubic-bezier(.4,0,.3,1)}
+.gate .door-r{transform-box:view-box;transform-origin:122px 110px;transition:transform .7s cubic-bezier(.4,0,.3,1)}
+.gate.open .door-l{transform:translateX(-30px) scaleX(.35)}
+.gate.open .door-r{transform:translateX(30px) scaleX(.35)}
+.gate .gate-glow{opacity:0;transition:opacity .6s}
+.gate.open .gate-glow{opacity:1}
+.gate-label{background:rgba(4,24,46,.7);border:2px solid var(--bio);border-radius:12px;padding:4px 8px;margin-top:4px}
+.gate-label b{display:block;font-family:'Marhey';font-weight:700;color:var(--bio);font-size:15px;line-height:1.2}
+.gate-label span{display:block;font-size:24px;font-weight:800;color:var(--gold);line-height:1.1}
+.gate.nope{animation:shakeX .45s}
+.gate.hintg{filter:drop-shadow(0 0 14px rgba(255,194,60,.95))}
+.gate.cool{pointer-events:none}
+
+/* ===== المرحلة ٤: الخريطة والكنز ===== */
+.treasure-wrap{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;justify-content:center}
+.map{position:relative;width:300px;flex:none;background:linear-gradient(150deg,#f7e9c8,var(--sand) 55%,var(--sand-d));border:4px solid var(--brass);border-radius:14px;padding:8px;box-shadow:0 6px 0 var(--sub-dd),inset 0 0 30px rgba(160,120,60,.35)}
+.map svg{width:100%;display:block}
+.map .mp{opacity:.14;filter:grayscale(1);transition:.7s cubic-bezier(.34,1.56,.64,1);transform-box:fill-box;transform-origin:center}
+.map .mp.on{opacity:1;filter:none}
+.map .mq{transition:opacity .5s}
+.map .mq.off{opacity:0}
+.map-title{text-align:center;font-family:'Marhey';font-weight:700;color:#7a5a2a;font-size:15px}
+.map-pieces{display:flex;gap:6px;justify-content:center;margin-top:4px}
+.mp-dot{width:16px;height:16px;border-radius:4px;background:rgba(122,90,42,.25);border:2px solid #a9834a}
+.mp-dot.on{background:var(--gold);border-color:var(--sub-dd);box-shadow:0 0 8px rgba(255,194,60,.8)}
+.challenge{flex:1;min-width:260px;background:rgba(4,24,46,.55);border:3px solid var(--bio);border-radius:18px;padding:14px}
+.ch-q{font-family:'Marhey';font-weight:700;font-size:clamp(17px,3.2vw,22px);color:var(--sub);text-align:center;margin-bottom:12px;line-height:1.4}
+.ch-q b{color:var(--bio)}
+.ch-opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.ch-opt{position:relative;width:118px;background:var(--sand);border:3px solid var(--brass);border-radius:14px;padding:7px;text-align:center;box-shadow:0 4px 0 var(--sub-dd);transition:transform .18s}
+.ch-opt:hover{transform:translateY(-4px)}
+.ch-opt svg{width:60px;height:60px;display:block;margin:0 auto}
+.ch-opt .cw{font-weight:800;font-size:19px;color:var(--ink)}
+.ch-opt.right{border-color:var(--ok-d);background:#eafff4;box-shadow:0 0 18px rgba(63,224,138,.7),0 4px 0 var(--ok-d)}
+.ch-opt.right::after{content:'✓';position:absolute;top:-9px;left:-9px;width:28px;height:28px;border-radius:50%;background:var(--ok);color:#fff;font-size:16px;display:grid;place-items:center;border:2px solid #fff}
+.ch-opt.wrong{animation:shakeX .45s;border-color:var(--bad)}
+.ch-opt.cool{pointer-events:none}
+.chest-stage{display:none;flex-direction:column;align-items:center;gap:8px;padding:10px}
+.chest-stage.on{display:flex;animation:popIn .6s both}
+.chest{width:min(280px,72vw)}
+.chest svg{width:100%;display:block;overflow:visible}
+.chest .lid{transform-box:view-box;transform-origin:32px 74px;transition:transform .9s cubic-bezier(.34,1.4,.64,1)}
+.chest.open .lid{transform:rotate(-62deg) translateY(-6px)}
+.chest .lock{transition:.5s}
+.chest.open .lock{transform:translateY(50px) rotate(30deg);opacity:0}
+.chest .glow{opacity:0;transition:opacity .8s .3s}
+.chest.open .glow{opacity:1;animation:chestGlow 2s ease-in-out infinite}
+@keyframes chestGlow{50%{opacity:.7}}
+.chest .loot{opacity:0;transform:scale(.4);transform-box:fill-box;transform-origin:center;transition:.6s .5s cubic-bezier(.34,1.56,.64,1)}
+.chest.open .loot{opacity:1;transform:scale(1)}
+.chest-msg{font-family:'Marhey';font-weight:700;font-size:clamp(20px,4vw,28px);color:var(--gold);text-shadow:0 0 18px rgba(255,194,60,.7);text-align:center}
+
+/* ===== إتمام وأزرار ===== */
+.done-card{width:100%;max-width:660px;background:rgba(4,24,46,.85);color:var(--foam);border:3px solid var(--bio);border-radius:18px;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 6px 0 var(--steel-d);animation:riseIn .5s both;scroll-margin:90px 0 150px}
+.done-card p{font-weight:800;font-size:19px}
+.btn-primary{position:relative;overflow:hidden;font-family:'Marhey';font-weight:700;font-size:19px;background:linear-gradient(var(--sub),var(--sub-d));color:#4a2e00;border:3px solid var(--sub-dd);border-radius:999px;padding:11px 28px;box-shadow:0 6px 0 var(--sub-dd),0 10px 22px rgba(255,207,74,.3);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 3px 0 var(--sub-dd)}
+.btn-primary::after{content:'';position:absolute;top:0;bottom:0;width:40%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.6),transparent);left:-60%;animation:shineSweep 3.2s infinite}
+@keyframes shineSweep{0%,55%{left:-60%}100%{left:130%}}
+.btn-primary.big{font-size:24px;padding:15px 42px}
+.btn-plain{font-weight:800;font-size:17px;background:rgba(255,255,255,.1);color:var(--foam);border:3px solid var(--steel);border-radius:999px;padding:10px 26px;cursor:pointer}
+.btn-hint{flex:none;background:rgba(255,79,139,.14);border:2px solid var(--coral);color:#ffb8d2;border-radius:999px;padding:8px 18px;font-weight:800;font-size:15px;cursor:pointer;transition:.2s;margin-bottom:18px}
+.btn-hint:hover{background:rgba(255,79,139,.26);transform:translateY(-2px)}
+.progress-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.progress-label{font-weight:800;color:var(--bio);font-size:15px;background:rgba(4,24,46,.6);border:2px solid var(--bio);border-radius:999px;padding:3px 14px}
+
+/* ===== الأخطبوط توتو ===== */
+footer{position:sticky;bottom:0;z-index:25;background:linear-gradient(180deg,rgba(4,24,46,.6),rgba(3,16,32,.97));backdrop-filter:blur(6px);border-top:3px solid var(--steel)}
+.guide-in{max-width:1120px;margin:0 auto;display:flex;align-items:flex-end;gap:14px;padding:6px 16px 10px}
+.octo{width:110px;flex:none}
+.osvg{width:100%;display:block;overflow:visible}
+.octo .o-all{animation:bob 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.octo .tent{transform-box:fill-box;transform-origin:top center;animation:tentWave 2.6s ease-in-out infinite}
+.octo .t2{animation-delay:.2s}.octo .t3{animation-delay:.4s}.octo .t4{animation-delay:.6s}
+.octo .t5{animation-delay:.8s}.octo .t6{animation-delay:1s}.octo .t7{animation-delay:1.2s}.octo .t8{animation-delay:1.4s}
+@keyframes tentWave{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.octo[data-mood=happy] .tent{animation-duration:1.1s}
+.octo[data-mood=sad] .tent{animation-duration:4s}
+.octo[data-mood=sad] .o-head{transform:rotate(-6deg) translateY(3px)}
+.octo .o-head{transform-box:fill-box;transform-origin:center;transition:transform .3s}
+.octo[data-mood=cheer] .o-all{animation:cheerJump 1s ease-in-out infinite}
+.octo[data-mood=cheer] .tent{animation-duration:.7s}
+@keyframes cheerJump{0%,100%{transform:translateY(0)}30%{transform:translateY(-15px) rotate(-5deg)}60%{transform:translateY(-3px)}80%{transform:translateY(-9px) rotate(5deg)}}
+.o-eyes-happy,.o-mouth-sad{display:none}
+.octo[data-mood=happy] .o-eyes-idle,.octo[data-mood=cheer] .o-eyes-idle{display:none}
+.octo[data-mood=happy] .o-eyes-happy,.octo[data-mood=cheer] .o-eyes-happy{display:block}
+.octo[data-mood=happy] .o-mouth-idle,.octo[data-mood=cheer] .o-mouth-idle,.octo[data-mood=sad] .o-mouth-idle{display:none}
+.octo[data-mood=sad] .o-mouth-sad{display:block}
+.octo.talk .o-mouth-idle{animation:talk .15s 8 alternate;transform-box:fill-box;transform-origin:center}
+@keyframes talk{to{transform:scaleY(.35)}}
+.bubble{flex:1;min-width:0;background:var(--sand);color:var(--ink);border:3px solid var(--brass);border-radius:18px;padding:11px 16px;font-weight:600;font-size:17px;line-height:1.55;position:relative;box-shadow:0 5px 0 var(--sub-dd);margin-bottom:14px}
+.bubble::after{content:'';position:absolute;right:-19px;bottom:20px;border:10px solid transparent;border-left-color:var(--brass)}
+.bubble.pop{animation:popIn .35s}
+.bubble .taa{color:var(--coral-d);font-weight:800;font-size:1.15em}
+
+/* ===== الطبقات ===== */
+#fxcv{position:fixed;inset:0;z-index:60;pointer-events:none}
+#fxLayer{position:fixed;inset:0;z-index:55;pointer-events:none}
+.overlay{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;padding:22px 16px;background:rgba(3,16,32,.9);backdrop-filter:blur(7px);opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto;overscroll-behavior:contain}
+.overlay>*{margin:auto 0;flex:none}
+.overlay.show{opacity:1;pointer-events:auto}
+.overlay.trans{background:linear-gradient(180deg,#0a5a86,#04182e 70%,#0a0f2e)}
+.intro-card{max-width:700px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:15px;animation:riseIn .55s both;padding:10px 0 20px}
+.intro-hero{width:min(300px,78vw)}
+.intro-hero svg{width:100%;display:block}
+.intro-title{font-family:'Marhey';font-weight:700;font-size:clamp(32px,7vw,52px);background:linear-gradient(90deg,var(--sub),var(--bio),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(0,0,0,.45));line-height:1.2}
+.story{display:flex;align-items:center;gap:14px;background:var(--sand);color:var(--ink);border:3px solid var(--brass);border-radius:20px;padding:14px 18px;box-shadow:0 6px 0 var(--sub-dd);text-align:right}
+.story .octo{width:96px}
+.story p{font-weight:600;font-size:16.5px;line-height:1.75}
+.story b{color:var(--coral-d)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{background:rgba(53,240,224,.1);border:2px solid var(--bio);color:var(--bio);border-radius:999px;padding:5px 14px;font-weight:700;font-size:14px}
+.chip b{color:var(--sub)}
+.skill-chip{background:rgba(255,194,60,.12);border-color:var(--gold);color:var(--gold-l)}
+.tiny-note{color:var(--dim);font-size:13px;font-weight:600}
+.trans-card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;animation:popIn .5s both}
+.trans-card .trans-sub{width:min(240px,64vw)}
+.trans-card .trans-sub svg{width:100%;display:block}
+.trans-num{font-family:'Marhey';font-weight:700;font-size:23px;color:var(--bio)}
+.trans-title{font-family:'Marhey';font-weight:700;font-size:clamp(32px,7vw,48px);color:var(--sub);text-shadow:0 0 20px rgba(255,207,74,.5),0 4px 0 rgba(0,0,0,.45)}
+.trans-sub-txt{color:#bfe6f5;font-weight:600;font-size:17px;max-width:440px}
+.trans-depth{font-weight:800;color:var(--bio);border:2px dashed var(--bio);border-radius:999px;padding:3px 18px}
+.finale-card{max-width:580px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 0 24px;animation:riseIn .5s both}
+.finale-card .octo{width:96px}
+.medal-svg{width:min(260px,62vw);display:block;animation:medalDrop .9s cubic-bezier(.34,1.56,.64,1) both;filter:drop-shadow(0 0 28px rgba(255,194,60,.6))}
+@keyframes medalDrop{0%{transform:translateY(-80px) scale(.5);opacity:0}60%{transform:translateY(8px) scale(1.06)}100%{transform:translateY(0) scale(1);opacity:1}}
+.medal-shine{transform-origin:120px 112px;animation:spin 6s linear infinite}
+.name-banner{background:linear-gradient(var(--coral),var(--coral-d));color:#fff;font-family:'Marhey';font-weight:700;font-size:22px;padding:6px 28px;border-radius:12px;border:3px solid #8a1a44;box-shadow:0 4px 0 #5a1030;margin-top:-14px;position:relative;z-index:1;min-width:210px}
+.finale-title{font-family:'Marhey';font-weight:700;font-size:clamp(26px,6vw,38px);color:var(--sub);text-shadow:0 0 18px rgba(255,207,74,.5)}
+.finale-rank{color:var(--bio);font-weight:700;font-size:18px}
+.finale-pearls{color:var(--pearl);font-weight:800;font-size:22px}
+.name-input{background:rgba(255,255,255,.08);border:2px dashed var(--bio);color:var(--foam);border-radius:12px;padding:9px 14px;font-family:inherit;font-weight:700;font-size:18px;text-align:center;width:min(290px,86%)}
+.name-input::placeholder{color:var(--dim)}
+.confirm-card{max-width:400px;width:100%;background:var(--sand);color:var(--ink);border:3px solid var(--brass);border-radius:20px;padding:26px;text-align:center;box-shadow:0 8px 0 var(--sub-dd);animation:popIn .35s both}
+.confirm-card h3{font-family:'Marhey';font-size:24px;margin-bottom:6px}
+.confirm-card p{font-weight:600;color:#7a5a2a;margin-bottom:18px}
+.confirm-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.confirm-btns .btn-plain{background:var(--sand-d);color:var(--ink);border-color:var(--brass)}
+
+@media (max-width:860px){
+  .depth-rail{display:none}
+  .letter-pad{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:760px){
+  .sub-wrap{width:170px}
+  .fish{width:126px}
+  .fish-card svg{width:46px;height:46px}
+  .fish-word{font-size:16px}
+  .fish.perched{width:62px}
+  .fish-perch{width:62px;height:38px}
+  .word-card svg{width:58px;height:58px}
+  .gate-label b{font-size:13px}
+  .gate-label span{font-size:20px}
+  .map{width:min(280px,88vw)}
+  .ch-opt{width:104px}
+  .ch-opt svg{width:52px;height:52px}
+  .ch-opt .cw{font-size:17px}
+  .octo{width:84px}
+  .bubble{font-size:14.5px;padding:9px 12px}
+  .btn-hint{padding:7px 13px;font-size:13.5px;margin-bottom:14px}
+  .logo b{font-size:16px}
+  .logo small{display:none}
+  .pip .lbl{display:none}
+  .pip{padding:4px 7px}
+  .hbtn .lbl{display:none}
+  .hbtn{padding:6px 9px}
+  .story{flex-direction:column;text-align:center}
+  .sea{padding:12px 10px 42px}
+}
+@media (max-width:560px){
+  .pips{order:3;flex-basis:100%;padding-bottom:2px}
+  .hud-in{gap:8px;padding:8px 12px}
+  .letter-pad{grid-template-columns:repeat(4,1fr);gap:8px}
+  .fish{width:calc(50% - 8px);max-width:140px}
+  .gates{gap:6px}
+  .sea-top{justify-content:center}
+  .sub-status{min-width:140px}
+}
+@media (max-height:640px){
+  .octo{width:70px}
+  .sub-wrap{width:150px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:30px;text-align:center;font-size:20px">هذه اللعبة تحتاج إلى تفعيل جافاسكربت لتعمل 🐙</p></noscript>
+
+<div class="bg-stack" aria-hidden="true">
+  <div class="godrays"></div>
+  <div class="glowblob gb1"></div><div class="glowblob gb2"></div>
+  <canvas id="bgcv"></canvas>
+  <div class="reef" id="reef"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<div id="app">
+  <header>
+    <div class="hud-in">
+      <div class="logo"><span id="logoSub"></span><span><b>غواصة التاء</b><small>رحلة كنز الأعماق</small></span></div>
+      <div class="pips" id="pips" aria-label="مراحل الرحلة"></div>
+      <div class="hud-ctrl">
+        <div class="pearls" id="pearlsBox" aria-label="اللآلئ المجموعة"><span id="pearlIco"></span><span id="pearlCount">٠</span></div>
+        <button class="hbtn" id="soundBtn" aria-pressed="true" aria-label="كتم الصوت"></button>
+        <button class="hbtn" id="restartBtn" aria-label="رحلة جديدة"></button>
+      </div>
+    </div>
+  </header>
+
+  <main><div id="stage"></div></main>
+
+  <footer>
+    <div class="guide-in">
+      <div class="octo" id="octo" data-mood="idle" aria-hidden="true"></div>
+      <div class="bubble" id="bubble" aria-live="polite">أهلاً! أنا الأخطبوط توتو 🐙</div>
+      <button class="btn-hint" id="hintBtn">💡 تلميح</button>
+    </div>
+  </footer>
+</div>
+
+<canvas id="fxcv" aria-hidden="true"></canvas>
+<div id="fxLayer" aria-hidden="true"></div>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true"></div>
+
+<script>
+(function(){
+'use strict';
+const $=(s,r)=>(r||document).querySelector(s);
+const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{const c=a.slice();for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;};
+const AR='٠١٢٣٤٥٦٧٨٩';
+const arNum=n=>String(n).split('').map(d=>AR[+d]!==undefined?AR[+d]:d).join('');
+const center=el=>{const r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2};};
+const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let TOKEN=0;
+const later=(ms,fn)=>{const t=TOKEN;return setTimeout(()=>{if(t===TOKEN)fn();},ms);};
+const PAL=['#ffc23c','#35f0e0','#ff4f8b','#4dffd2','#ffcf4a','#3fe08a','#fdfbff','#a8eef5'];
+const PRAISE=['أحسنت يا بحّار! 🌟','رائع! لؤلؤة جديدة 🦪','عمل ممتاز! 🐙','يا لك من غوّاص ذكي!','مذهل! نقترب من الكنز! 💎'];
+const hasTaa=w=>w.includes('ت');
+const POS_NAME=['أول الكلمة','وسط الكلمة','آخر الكلمة'];
+const POS_FORM=['تـ','ـتـ','ـت'];
+const DEPTH=[0,200,450,700,1000];
+
+const S={screen:'intro',stage:0,pearls:0,mistakes:0,sound:true,busy:false,powered:false,depth:0,
+  done:[false,false,false,false],hintHandler:null};
+try{const p=localStorage.getItem('sub-taa-sound');if(p!==null)S.sound=p==='1';}catch(e){}
+
+/* ================= رسوم SVG ================= */
+const pearlSVG=()=>`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34" fill="#fdfbff" stroke="#b9c9d8" stroke-width="3"/><ellipse cx="39" cy="38" rx="11" ry="8" fill="#fff" opacity=".95" transform="rotate(-25 39 38)"/><circle cx="62" cy="64" r="6" fill="#e6f2ff" opacity=".8"/></svg>`;
+const sndOnSVG=()=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 H8 L13 4 V20 L8 15 H4 Z" fill="currentColor"/><path d="M16 8 Q19 12 16 16 M18.5 5.5 Q23 12 18.5 18.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+const sndOffSVG=()=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 H8 L13 4 V20 L8 15 H4 Z" fill="currentColor"/><path d="M16 9 L22 15 M22 9 L16 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+const restartSVG=()=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5 A7 7 0 1 1 5.4 9.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M13 1.5 L13 8.5 L7 5 Z" fill="currentColor"/></svg>`;
+function diverFace(){return `<g>
+ <circle cx="0" cy="0" r="17" fill="#f2c9a0"/>
+ <path d="M-17 -6 Q0 -22 17 -6 L17 -10 Q0 -26 -17 -10 Z" fill="#2b5a7a"/>
+ <rect x="-15" y="-8" width="30" height="13" rx="6" fill="rgba(53,240,224,.55)" stroke="#173d57" stroke-width="2.5"/>
+ <circle cx="-6" cy="-1" r="2.6" fill="#062033"/><circle cx="6" cy="-1" r="2.6" fill="#062033"/>
+ <path d="M-6 8 Q0 13 6 8" fill="none" stroke="#a05a3a" stroke-width="2.2" stroke-linecap="round"/>
+ <circle cx="-12" cy="6" r="2.6" fill="#ff9a8a" opacity=".5"/><circle cx="12" cy="6" r="2.6" fill="#ff9a8a" opacity=".5"/>
+ <path d="M15 2 Q22 4 20 10" fill="none" stroke="#173d57" stroke-width="3" stroke-linecap="round"/>
+</g>`;}
+function submarineSVG(small){return `<svg viewBox="0 0 280 156" class="sub-svg" aria-hidden="true">
+<g class="sub-all">
+ <g class="sub-beam"><path d="M246 78 L280 40 L280 116 Z" fill="#ffe9a8" opacity=".5"/><path d="M246 78 L280 56 L280 100 Z" fill="#fff6d8" opacity=".5"/></g>
+ <ellipse cx="140" cy="120" rx="96" ry="10" fill="#04182e" opacity=".3"/>
+ <g class="prop"><ellipse cx="34" cy="78" rx="7" ry="26" fill="#9aa4b8" stroke="#5a6a80" stroke-width="2"/><ellipse cx="34" cy="78" rx="26" ry="7" fill="#9aa4b8" stroke="#5a6a80" stroke-width="2"/><circle cx="34" cy="78" r="7" fill="#5a6a80"/></g>
+ <path d="M52 78 L70 52 L70 104 Z" fill="#e09a12" stroke="#8a5a14" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M120 34 h50 a10 10 0 0 1 10 10 v14 h-70 v-14 a10 10 0 0 1 10 -10 Z" fill="#e09a12" stroke="#8a5a14" stroke-width="3"/>
+ <path d="M148 34 V16 h16" fill="none" stroke="#8a5a14" stroke-width="5" stroke-linecap="round"/>
+ <circle cx="166" cy="16" r="5" fill="#35f0e0" stroke="#0d8a80" stroke-width="2"/>
+ <ellipse cx="146" cy="78" rx="102" ry="44" fill="#ffcf4a" stroke="#8a5a14" stroke-width="4"/>
+ <path d="M50 88 Q146 118 244 88 Q146 106 50 88 Z" fill="#e09a12" opacity=".65"/>
+ <path d="M60 62 Q146 44 240 62" fill="none" stroke="#ffe9a8" stroke-width="5" opacity=".7" stroke-linecap="round"/>
+ <rect x="96" y="70" width="52" height="16" rx="8" fill="#e09a12" opacity=".5"/>
+ <circle cx="106" cy="78" r="13" fill="#0a4a6e" stroke="#8a5a14" stroke-width="4"/>
+ <circle cx="106" cy="78" r="9" fill="rgba(53,240,224,.45)"/>
+ <circle cx="139" cy="78" r="10" fill="#0a4a6e" stroke="#8a5a14" stroke-width="3.5"/>
+ <circle cx="196" cy="78" r="31" fill="#0a4a6e" stroke="#8a5a14" stroke-width="5"/>
+ <circle cx="196" cy="78" r="26" fill="rgba(53,240,224,.28)"/>
+ <g transform="translate(196 80)">${diverFace()}</g>
+ <g class="diver-hand"><path d="M214 96 Q222 90 220 82" fill="none" stroke="#f2c9a0" stroke-width="6" stroke-linecap="round"/></g>
+ <path d="M170 60 Q186 52 202 56" fill="none" stroke="#fff" stroke-width="4" opacity=".45" stroke-linecap="round"/>
+ <circle cx="243" cy="78" r="9" fill="#ffe9a8" stroke="#8a5a14" stroke-width="3" class="sub-lamp"/>
+ <g class="sub-glow"><circle cx="243" cy="78" r="15" fill="#ffe9a8" opacity=".35"/><circle cx="166" cy="16" r="9" fill="#35f0e0" opacity=".3"/></g>
+ <circle cx="76" cy="60" r="3" fill="#8a5a14"/><circle cx="76" cy="96" r="3" fill="#8a5a14"/><circle cx="216" cy="52" r="3" fill="#8a5a14"/>
+ ${small?'':'<path d="M120 122 q10 12 22 0" fill="none" stroke="#8a5a14" stroke-width="3" opacity=".5"/>'}
+</g></svg>`;}
+function octoSVG(){
+ const tent=(x,d,cls)=>`<path class="tent ${cls}" d="${d}" fill="none" stroke="#ff4f8b" stroke-width="11" stroke-linecap="round"/>`;
+ return `<svg viewBox="0 0 150 150" class="osvg" aria-hidden="true">
+<ellipse cx="75" cy="142" rx="34" ry="6" fill="#04182e" opacity=".35"/>
+<g class="o-all">
+ ${tent(0,'M40 96 Q26 116 34 134','t1')}
+ ${tent(0,'M52 100 Q44 122 52 138','t2')}
+ ${tent(0,'M64 102 Q60 124 66 140','t3')}
+ ${tent(0,'M75 103 Q75 126 75 141','t4')}
+ ${tent(0,'M86 102 Q90 124 84 140','t5')}
+ ${tent(0,'M98 100 Q106 122 98 138','t6')}
+ ${tent(0,'M110 96 Q124 116 116 134','t7')}
+ ${tent(0,'M118 90 Q136 104 130 122','t8')}
+ <g class="o-head">
+  <ellipse cx="75" cy="62" rx="48" ry="42" fill="#ff4f8b" stroke="#c22a63" stroke-width="3"/>
+  <ellipse cx="60" cy="42" rx="18" ry="12" fill="#ff8fb4" opacity=".55" transform="rotate(-18 60 42)"/>
+  <circle cx="104" cy="44" r="5" fill="#ff8fb4" opacity=".5"/><circle cx="112" cy="60" r="3.6" fill="#ff8fb4" opacity=".5"/>
+  <g class="o-eyes-idle"><ellipse cx="60" cy="60" rx="10" ry="11" fill="#fff"/><ellipse cx="90" cy="60" rx="10" ry="11" fill="#fff"/><circle cx="62" cy="62" r="5" fill="#062033"/><circle cx="92" cy="62" r="5" fill="#062033"/><circle cx="64" cy="59" r="1.8" fill="#fff"/><circle cx="94" cy="59" r="1.8" fill="#fff"/></g>
+  <g class="o-eyes-happy"><path d="M50 62 Q60 50 70 62" fill="none" stroke="#062033" stroke-width="4" stroke-linecap="round"/><path d="M80 62 Q90 50 100 62" fill="none" stroke="#062033" stroke-width="4" stroke-linecap="round"/></g>
+  <path class="o-mouth-idle" d="M66 80 Q75 88 84 80" fill="none" stroke="#8a1a44" stroke-width="3" stroke-linecap="round"/>
+  <circle class="o-mouth-sad" cx="75" cy="83" r="4.6" fill="none" stroke="#8a1a44" stroke-width="2.8"/>
+  <circle cx="46" cy="74" r="5" fill="#ffb8d2" opacity=".7"/><circle cx="104" cy="74" r="5" fill="#ffb8d2" opacity=".7"/>
+ </g>
+ <circle cx="34" cy="128" r="3" fill="#35f0e0" opacity=".8"/><circle cx="116" cy="128" r="3" fill="#35f0e0" opacity=".8"/><circle cx="75" cy="136" r="3" fill="#35f0e0" opacity=".8"/>
+</g></svg>`;}
+const FISH_COLORS=[['#ff9f4a','#e0761c'],['#35f0e0','#0d8a80'],['#ff4f8b','#c22a63'],['#a78bfa','#6d3fd6'],['#4dffd2','#1c8a52']];
+function fishSVG(c1,c2){return `<svg viewBox="0 0 150 80" class="fish-svg" aria-hidden="true">
+<g class="tail"><path d="M38 40 L10 18 Q16 40 10 62 Z" fill="${c2}" stroke="#062033" stroke-width="2.5" stroke-linejoin="round"/></g>
+<path class="fin" d="M78 22 Q86 4 98 20 Z" fill="${c2}" stroke="#062033" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M74 58 Q82 74 94 60 Z" fill="${c2}" stroke="#062033" stroke-width="2.5" stroke-linejoin="round"/>
+<ellipse cx="86" cy="40" rx="50" ry="27" fill="${c1}" stroke="#062033" stroke-width="3"/>
+<path d="M46 32 Q86 20 128 32" fill="none" stroke="#fff" stroke-width="4" opacity=".35" stroke-linecap="round"/>
+<path d="M70 24 Q76 40 70 56 M92 22 Q98 40 92 58" fill="none" stroke="${c2}" stroke-width="3" opacity=".6"/>
+<circle cx="118" cy="34" r="7" fill="#fff" stroke="#062033" stroke-width="2"/><circle cx="120" cy="35" r="3.4" fill="#062033"/><circle cx="121.5" cy="33" r="1.2" fill="#fff"/>
+<path d="M126 48 Q132 52 136 47" fill="none" stroke="#062033" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="108" cy="47" r="3.4" fill="#ff8fb0" opacity=".55"/>
+</svg>`;}
+function gateSVG(){return `<svg viewBox="0 0 160 190" aria-hidden="true">
+<g class="gate-glow"><ellipse cx="80" cy="112" rx="46" ry="60" fill="#35f0e0" opacity=".45"/><path d="M80 60 L52 176 L108 176 Z" fill="#a8eef5" opacity=".35"/></g>
+<path d="M22 176 V96 Q80 34 138 96 V176 Z" fill="#0a4a6e" stroke="#173d57" stroke-width="4"/>
+<g class="door-l"><path d="M38 172 V100 Q56 68 78 62 V172 Z" fill="#2b5a7a" stroke="#8a5a14" stroke-width="3"/><circle cx="70" cy="120" r="4" fill="#ffc23c"/><path d="M46 108 h22 M46 132 h22 M46 154 h22" stroke="#173d57" stroke-width="3"/></g>
+<g class="door-r"><path d="M122 172 V100 Q104 68 82 62 V172 Z" fill="#2b5a7a" stroke="#8a5a14" stroke-width="3"/><circle cx="90" cy="120" r="4" fill="#ffc23c"/><path d="M92 108 h22 M92 132 h22 M92 154 h22" stroke="#173d57" stroke-width="3"/></g>
+<path d="M22 176 V96 Q80 34 138 96 V176" fill="none" stroke="#c98a2e" stroke-width="6"/>
+<path d="M14 176 h132" stroke="#8a5a14" stroke-width="7" stroke-linecap="round"/>
+<path d="M24 92 Q10 70 20 52 Q34 66 28 90 Z" fill="#3fe08a" stroke="#1c8a52" stroke-width="2"/>
+<path d="M136 92 Q150 70 140 52 Q126 66 132 90 Z" fill="#3fe08a" stroke="#1c8a52" stroke-width="2"/>
+<circle cx="80" cy="46" r="13" fill="#04182e" stroke="#ffc23c" stroke-width="3"/>
+<circle cx="30" cy="150" r="4" fill="#ff4f8b"/><circle cx="130" cy="150" r="4" fill="#ff4f8b"/>
+</svg>`;}
+function mapSVG(){return `<svg viewBox="0 0 300 210" aria-hidden="true">
+<path d="M8 14 Q60 6 150 12 Q240 6 292 14 L288 196 Q220 204 150 198 Q80 204 12 196 Z" fill="#f7e9c8" stroke="#a9834a" stroke-width="3"/>
+<path d="M20 26 Q80 20 150 24 Q220 20 280 26" fill="none" stroke="#d9c096" stroke-width="2"/>
+<g class="mp mp1"><path d="M40 170 Q70 130 60 96 Q52 66 84 48" fill="none" stroke="#a02a22" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round"/><circle cx="40" cy="170" r="8" fill="#35d0e0" stroke="#173d57" stroke-width="2.5"/><path d="M30 160 q10 -12 20 0" fill="none" stroke="#173d57" stroke-width="2"/><text x="40" y="190" text-anchor="middle" font-size="12" font-weight="800" fill="#7a5a2a" style="font-family:'Baloo Bhaijaan 2',sans-serif">البداية</text></g>
+<g class="mp mp2"><path d="M84 48 Q120 34 150 60 Q180 86 214 70" fill="none" stroke="#a02a22" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round"/><path d="M120 120 Q140 100 168 112 Q186 124 176 142 Q150 156 124 144 Z" fill="#3fe08a" opacity=".55" stroke="#1c8a52" stroke-width="2.5"/><path d="M140 118 q6 -14 14 -2" fill="none" stroke="#1c8a52" stroke-width="2.5"/><circle cx="205" cy="120" r="5" fill="#ff4f8b"/><circle cx="222" cy="132" r="4" fill="#ff4f8b"/><text x="150" y="176" text-anchor="middle" font-size="12" font-weight="800" fill="#7a5a2a" style="font-family:'Baloo Bhaijaan 2',sans-serif">جزيرة التاء</text></g>
+<g class="mp mp3"><path d="M214 70 Q248 62 254 96" fill="none" stroke="#a02a22" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round"/><path d="M240 84 L268 112 M268 84 L240 112" stroke="#a02a22" stroke-width="8" stroke-linecap="round"/><circle cx="254" cy="98" r="24" fill="none" stroke="#a02a22" stroke-width="2.5" stroke-dasharray="5 5"/><text x="254" y="140" text-anchor="middle" font-size="12" font-weight="800" fill="#7a5a2a" style="font-family:'Baloo Bhaijaan 2',sans-serif">الكنز!</text></g>
+<g class="mq mq1"><rect x="24" y="40" width="80" height="150" rx="8" fill="#c9b48a" opacity=".55"/><text x="64" y="122" text-anchor="middle" font-size="34" font-weight="800" fill="#7a5a2a">؟</text></g>
+<g class="mq mq2"><rect x="108" y="30" width="94" height="160" rx="8" fill="#c9b48a" opacity=".55"/><text x="155" y="118" text-anchor="middle" font-size="34" font-weight="800" fill="#7a5a2a">؟</text></g>
+<g class="mq mq3"><rect x="206" y="40" width="76" height="150" rx="8" fill="#c9b48a" opacity=".55"/><text x="244" y="122" text-anchor="middle" font-size="34" font-weight="800" fill="#7a5a2a">؟</text></g>
+<g opacity=".7"><circle cx="264" cy="34" r="14" fill="none" stroke="#7a5a2a" stroke-width="2"/><path d="M264 22 L268 34 L264 46 L260 34 Z" fill="#a02a22"/><text x="264" y="18" text-anchor="middle" font-size="9" font-weight="800" fill="#7a5a2a">ش</text></g>
+</svg>`;}
+function chestSVG(){return `<svg viewBox="0 0 240 200" aria-hidden="true">
+<g class="glow"><ellipse cx="120" cy="96" rx="86" ry="30" fill="#ffc23c" opacity=".5"/><path d="M60 96 L30 10 L92 74 L120 4 L148 74 L210 10 L180 96 Z" fill="#ffe9a8" opacity=".4"/></g>
+<ellipse cx="120" cy="182" rx="84" ry="10" fill="#04182e" opacity=".35"/>
+<rect x="34" y="92" width="172" height="82" rx="10" fill="#a9762e" stroke="#6b4526" stroke-width="4"/>
+<rect x="42" y="100" width="156" height="66" rx="6" fill="#c98a2e" opacity=".55"/>
+<path d="M34 122 H206 M34 148 H206" stroke="#6b4526" stroke-width="3" opacity=".6"/>
+<rect x="28" y="130" width="184" height="14" rx="5" fill="#ffc23c" stroke="#8a5a14" stroke-width="2.5"/>
+<g class="loot">
+ <circle cx="86" cy="98" r="13" fill="#fdfbff" stroke="#b9c9d8" stroke-width="2"/><ellipse cx="82" cy="93" rx="4" ry="3" fill="#fff"/>
+ <circle cx="120" cy="92" r="15" fill="#fdfbff" stroke="#b9c9d8" stroke-width="2"/><ellipse cx="115" cy="86" rx="5" ry="3.4" fill="#fff"/>
+ <circle cx="154" cy="98" r="12" fill="#fdfbff" stroke="#b9c9d8" stroke-width="2"/><ellipse cx="150" cy="93" rx="4" ry="2.6" fill="#fff"/>
+ <path d="M120 46 L126 62 L143 62 L129 72 L134 88 L120 78 L106 88 L111 72 L97 62 L114 62 Z" fill="#ffc23c" stroke="#c98a2e" stroke-width="2"/>
+ <circle cx="70" cy="84" r="6" fill="#35f0e0"/><circle cx="172" cy="84" r="6" fill="#ff4f8b"/>
+</g>
+<g class="lid"><path d="M30 92 V78 Q120 34 210 78 V92 Z" fill="#c98a2e" stroke="#6b4526" stroke-width="4"/><path d="M40 84 Q120 48 200 84" fill="none" stroke="#ffc23c" stroke-width="5" opacity=".7"/></g>
+<g class="lock"><rect x="106" y="120" width="28" height="24" rx="6" fill="#ffc23c" stroke="#8a5a14" stroke-width="2.5"/><path d="M112 120 V113 Q120 102 128 113 V120" fill="none" stroke="#9aa4b8" stroke-width="4.5"/><circle cx="120" cy="131" r="3.4" fill="#8a5a14"/></g>
+</svg>`;}
+function medalSVG(){
+ let star='';for(let i=0;i<14;i++){const a=-Math.PI/2+i*Math.PI/7,r=i%2?76:100;star+=(i?'L':'M')+(120+Math.cos(a)*r).toFixed(1)+' '+(112+Math.sin(a)*r).toFixed(1)+' ';}
+ return `<svg viewBox="0 0 240 274" class="medal-svg" aria-hidden="true">
+<path d="M84 162 L64 252 L100 228 L118 260 L130 168 Z" fill="#35f0e0" stroke="#0d8a80" stroke-width="3" stroke-linejoin="round"/>
+<path d="M156 162 L176 252 L140 228 L122 260 L110 168 Z" fill="#ff4f8b" stroke="#c22a63" stroke-width="3" stroke-linejoin="round"/>
+<path d="${star}Z" fill="#ffb020" stroke="#8a5a14" stroke-width="3"/>
+<circle cx="120" cy="112" r="74" fill="#ffc23c" stroke="#c98a2e" stroke-width="3"/>
+<circle cx="120" cy="112" r="62" fill="#04182e" stroke="#e0890c" stroke-width="3"/>
+<g transform="translate(52,74) scale(.48)">${submarineSVG(true).replace('<svg viewBox="0 0 280 156" class="sub-svg" aria-hidden="true">','<g>').replace('</svg>','</g>')}</g>
+<text x="120" y="140" text-anchor="middle" font-size="40" font-weight="800" fill="#ffc23c" style="font-family:'Baloo Bhaijaan 2',sans-serif">ت</text>
+<text x="120" y="162" text-anchor="middle" font-size="14" fill="#35f0e0" style="font-family:'Marhey',sans-serif">مستكشف الأعماق</text>
+<g class="medal-shine"><path d="M120 38 A74 74 0 0 1 184 76" stroke="#fff" stroke-width="9" fill="none" opacity=".35" stroke-linecap="round"/></g>
+<circle cx="120" cy="26" r="6" fill="#fdfbff"/><circle cx="200" cy="112" r="5" fill="#fdfbff"/><circle cx="40" cy="112" r="5" fill="#fdfbff"/>
+</svg>`;}
+const face=(x,y,s,c)=>`<g transform="translate(${x} ${y}) scale(${s||1})"><circle cx="-7" cy="0" r="2.6" fill="${c||'#3a2a14'}"/><circle cx="7" cy="0" r="2.6" fill="${c||'#3a2a14'}"/><path d="M-4 5 Q0 9 4 5" stroke="${c||'#3a2a14'}" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="-12" cy="4" r="2.8" fill="#ff8fb0" opacity=".55"/><circle cx="12" cy="4" r="2.8" fill="#ff8fb0" opacity=".55"/></g>`;
+const PW=i=>`<svg viewBox="0 0 100 100" aria-hidden="true">${i}</svg>`;
+const PICS={
+croc:()=>PW(`<path d="M14 62 Q26 44 52 44 Q76 44 88 54 Q94 58 88 64 Q70 70 52 70 Q30 70 14 62 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2.5"/><path d="M14 62 Q6 58 4 66 Q10 70 16 66 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2.5"/><path d="M30 44 L36 34 L42 44 M46 44 L52 33 L58 44 M62 45 L68 36 L74 46" fill="#1c8a52" stroke="#1c6b3a" stroke-width="2" stroke-linejoin="round"/><path d="M62 60 h26" stroke="#1c6b3a" stroke-width="2"/><path d="M66 60 l3 5 l3 -5 M76 60 l3 5 l3 -5" fill="#fff" stroke="#1c6b3a" stroke-width="1.4"/><circle cx="72" cy="48" r="6" fill="#fff" stroke="#1c6b3a" stroke-width="2"/><circle cx="73" cy="48" r="2.8" fill="#062033"/><path d="M34 70 v8 M50 70 v8 M66 68 v8" stroke="#1c6b3a" stroke-width="4" stroke-linecap="round"/><circle cx="86" cy="55" r="1.8" fill="#1c6b3a"/>`),
+berries:()=>PW(`<path d="M50 24 Q64 10 72 20 Q62 30 50 24 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2"/><circle cx="38" cy="50" r="15" fill="#8b5cf6" stroke="#5a3a9a" stroke-width="2.5"/><circle cx="62" cy="48" r="14" fill="#8b5cf6" stroke="#5a3a9a" stroke-width="2.5"/><circle cx="50" cy="68" r="15" fill="#a06fe0" stroke="#5a3a9a" stroke-width="2.5"/><circle cx="33" cy="44" r="3.5" fill="#fff" opacity=".5"/><circle cx="57" cy="42" r="3" fill="#fff" opacity=".5"/>${face(50,68,.9,'#2a1050')}`),
+book:()=>PW(`<rect x="22" y="18" width="56" height="66" rx="8" fill="#35d0e0" stroke="#1a6a9f" stroke-width="3"/><rect x="66" y="18" width="12" height="66" rx="6" fill="#2ab0c0" stroke="#1a6a9f" stroke-width="2.5"/><path d="M38 18 V38 L44 33 L50 38 V18 Z" fill="#ff4f8b" stroke="#c22a63" stroke-width="2"/><rect x="30" y="46" width="30" height="4" rx="2" fill="#fff" opacity=".7"/>${face(45,62,1,'#0c3a5a')}`),
+house:()=>PW(`<rect x="62" y="28" width="9" height="14" fill="#c97b12" stroke="#7a4a08" stroke-width="2"/><rect x="24" y="46" width="52" height="38" rx="6" fill="#f4e4c1" stroke="#c97b12" stroke-width="3"/><path d="M18 50 L50 22 L82 50 Z" fill="#ff4f8b" stroke="#c22a63" stroke-width="3" stroke-linejoin="round"/><rect x="42" y="60" width="16" height="24" rx="7" fill="#35d0e0" stroke="#1a6a9f" stroke-width="2.5"/><circle cx="66" cy="60" r="6" fill="#ffc23c" stroke="#c97b12" stroke-width="2.5"/>${face(50,70,.55,'#0c3a5a')}`),
+banana:()=>PW(`<path d="M22 34 Q26 70 58 78 Q84 82 88 66 Q66 70 46 56 Q32 46 30 30 Z" fill="#ffcf4a" stroke="#c98a2e" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 26 Q34 60 62 70 Q86 74 90 58 Q68 62 48 48 Q36 38 36 24 Z" fill="#ffe07a" stroke="#c98a2e" stroke-width="2.5" stroke-linejoin="round"/><path d="M22 34 l-3 -8 M30 26 l-2 -8" stroke="#7a4a08" stroke-width="4" stroke-linecap="round"/><path d="M88 66 l6 2 M90 58 l6 2" stroke="#7a4a08" stroke-width="4" stroke-linecap="round"/><path d="M40 36 Q48 52 66 60" fill="none" stroke="#fff" stroke-width="3" opacity=".5"/>${face(58,58,.7,'#7a4a08')}`),
+dates:()=>PW(`<path d="M20 78 Q50 66 80 78 Q50 90 20 78 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2.5"/><ellipse cx="36" cy="56" rx="11" ry="17" fill="#8a4a1f" stroke="#5a2c0c" stroke-width="2.5" transform="rotate(-18 36 56)"/><ellipse cx="66" cy="58" rx="10" ry="16" fill="#8a4a1f" stroke="#5a2c0c" stroke-width="2.5" transform="rotate(22 66 58)"/><ellipse cx="52" cy="50" rx="11" ry="18" fill="#9a5a2a" stroke="#5a2c0c" stroke-width="2.5" transform="rotate(6 52 50)"/><ellipse cx="47" cy="40" rx="3.5" ry="6" fill="#c97b4a" opacity=".8" transform="rotate(6 47 40)"/>${face(52,54,.9,'#3a1c06')}`),
+crown:()=>PW(`<path d="M22 68 L18 34 L36 48 L50 26 L64 48 L82 34 L78 68 Z" fill="#ffc23c" stroke="#c97b12" stroke-width="3" stroke-linejoin="round"/><rect x="20" y="66" width="60" height="12" rx="6" fill="#ffb020" stroke="#c97b12" stroke-width="2.5"/><circle cx="18" cy="32" r="5" fill="#ff4f8b" stroke="#c22a63" stroke-width="2"/><circle cx="50" cy="24" r="5" fill="#35f0e0" stroke="#0d8a80" stroke-width="2"/><circle cx="82" cy="32" r="5" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2"/>${face(50,71,.75,'#5a3400')}`),
+apple:()=>PW(`<path d="M50 26 C36 14 16 22 16 44 C16 66 32 84 50 84 C68 84 84 66 84 44 C84 22 64 14 50 26 Z" fill="#ff5c5c" stroke="#a02020" stroke-width="2.5"/><path d="M50 26 Q49 14 56 10" stroke="#7a4a08" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M56 16 Q72 6 78 18 Q66 26 56 16 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2"/><ellipse cx="31" cy="38" rx="6" ry="10" fill="#fff" opacity=".35" transform="rotate(-20 31 38)"/>${face(50,52,1.1,'#5a1010')}`),
+key:()=>PW(`<circle cx="32" cy="42" r="17" fill="#ffc23c" stroke="#c97b12" stroke-width="3"/><circle cx="32" cy="42" r="7" fill="#f4e4c1" stroke="#c97b12" stroke-width="2.5"/><rect x="46" y="38" width="42" height="8" rx="4" fill="#ffc23c" stroke="#c97b12" stroke-width="2.5"/><rect x="72" y="46" width="6" height="11" rx="2" fill="#ffc23c" stroke="#c97b12" stroke-width="2"/><rect x="82" y="46" width="6" height="15" rx="2" fill="#ffc23c" stroke="#c97b12" stroke-width="2"/>${face(32,42,.5,'#5a3400')}`),
+olive:()=>PW(`<path d="M18 72 Q50 52 86 28" fill="none" stroke="#6b4a2f" stroke-width="4" stroke-linecap="round"/><ellipse cx="34" cy="52" rx="12" ry="5" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2" transform="rotate(-30 34 52)"/><ellipse cx="58" cy="38" rx="12" ry="5" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2" transform="rotate(-30 58 38)"/><ellipse cx="74" cy="50" rx="11" ry="5" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2" transform="rotate(20 74 50)"/><circle cx="40" cy="62" r="8" fill="#8fbf3f" stroke="#5a7a2a" stroke-width="2.5"/><circle cx="58" cy="50" r="8" fill="#8fbf3f" stroke="#5a7a2a" stroke-width="2.5"/><circle cx="74" cy="38" r="7" fill="#8fbf3f" stroke="#5a7a2a" stroke-width="2.5"/><circle cx="37" cy="59" r="2.4" fill="#fff" opacity=".5"/>${face(58,50,.5,'#3a4a14')}`),
+whale:()=>PW(`<path d="M80 50 Q92 40 94 30 Q96 44 90 52 Q96 56 94 66 Q86 60 80 58 Z" fill="#35d0e0" stroke="#1a6a9f" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 54 C20 36 40 28 56 30 C76 32 84 44 84 54 C84 66 70 74 52 74 C34 74 20 68 20 54 Z" fill="#35d0e0" stroke="#1a6a9f" stroke-width="3"/><path d="M28 63 Q50 72 72 63" stroke="#c8f4fa" stroke-width="6" fill="none" opacity=".9" stroke-linecap="round"/><path d="M40 28 Q38 18 32 14" stroke="#8fe3f0" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="29" cy="10" r="3" fill="#8fe3f0"/><circle cx="40" cy="8" r="2.5" fill="#8fe3f0"/>${face(44,50,1,'#0c3a5a')}`),
+plant:()=>PW(`<path d="M50 58 Q50 36 50 26" stroke="#1c6b3a" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M50 44 Q32 36 28 48 Q40 56 50 44 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2"/><path d="M50 36 Q68 28 72 40 Q60 48 50 36 Z" fill="#3fe08a" stroke="#1c6b3a" stroke-width="2"/><circle cx="50" cy="24" r="6" fill="#ff4f8b" stroke="#c22a63" stroke-width="2"/><path d="M32 60 H68 L64 86 H36 Z" fill="#ff9f4a" stroke="#c9502f" stroke-width="2.5" stroke-linejoin="round"/><rect x="30" y="56" width="40" height="8" rx="3" fill="#ffb87a" stroke="#c9502f" stroke-width="2.5"/>${face(50,72,.6,'#7a2a10')}`),
+moon:()=>PW(`<circle cx="50" cy="52" r="30" fill="#ffc23c" stroke="#c97b12" stroke-width="3"/><circle cx="36" cy="42" r="5" fill="#ffb020" opacity=".7"/><circle cx="62" cy="64" r="6" fill="#ffb020" opacity=".7"/><path d="M40 50 Q44 54 48 50 M56 50 Q60 54 64 50" stroke="#a06a00" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M46 62 Q52 66 58 62" stroke="#a06a00" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M16 24 L18 28 L22 30 L18 32 L16 36 L14 32 L10 30 L14 28 Z" fill="#ffe9a8"/>`),
+fishpic:()=>PW(`<path d="M70 54 L88 40 L84 54 L88 68 Z" fill="#ff4f8b" stroke="#c22a63" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="46" cy="54" rx="26" ry="18" fill="#ffb020" stroke="#c97b12" stroke-width="3"/><path d="M42 38 Q48 28 56 36" fill="#ffc23c" stroke="#c97b12" stroke-width="2"/><circle cx="33" cy="50" r="3" fill="#3a2a14"/><path d="M28 58 Q32 62 36 58" stroke="#3a2a14" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="20" cy="34" r="3" stroke="#8fe3f0" stroke-width="2" fill="none"/>`)
+};
+
+/* ================= البيانات ================= */
+const PAD=['ت','ب','ث','ن','ط','ة','ا','ف','م','ر','س','ك'];
+const LETTER_HINT={'ب':'هذه باء! نقطتها واحدة تحت الحرف، والتاء نقطتان فوق ☝️☝️','ث':'هذه ثاء! ثلاث نقاط فوق، والتاء نقطتان فقط!','ن':'هذه نون! نقطة واحدة فوق، والتاء نقطتان!','ط':'هذه طاء! شكلها مختلف ونقطة واحدة — ابحث عن ت!','ة':'هذه تاء مربوطة (ة) مدوّرة ومغلقة! نبحث عن التاء المفتوحة (ت)!'};
+const FISHES=[{w:'تمساح',pic:'croc'},{w:'توت',pic:'berries'},{w:'كتاب',pic:'book'},{w:'بيت',pic:'house'},{w:'موز',pic:'banana'}];
+const FISH_HINT={'موز':'«موز» ليس فيها حرف التاء! مـ و ز — لا توجد نقطتان فوق أي حرف 🍌'};
+const GATE_WORDS=[
+ {w:'تمر',pic:'dates',pos:0},{w:'تاج',pic:'crown',pos:0},{w:'تفاح',pic:'apple',pos:0},
+ {w:'كتاب',pic:'book',pos:1},{w:'مفتاح',pic:'key',pos:1},{w:'زيتون',pic:'olive',pos:1},
+ {w:'بيت',pic:'house',pos:2},{w:'حوت',pic:'whale',pos:2},{w:'نبات',pic:'plant',pos:2}];
+const CHALLENGES=[
+ {q:'أي كلمة تخفي حرف <b>التاء</b>؟',opts:[{w:'توت',pic:'berries'},{w:'موز',pic:'banana'},{w:'قمر',pic:'moon'},{w:'سمك',pic:'fishpic'}],ans:'توت',hint:'ابحث عن كلمة فيها حرف بنقطتين فوق الجسم: ت!'},
+ {q:'أي كلمة <b>تبدأ</b> بحرف التاء؟',opts:[{w:'كتاب',pic:'book'},{w:'تمساح',pic:'croc'},{w:'بيت',pic:'house'}],ans:'تمساح',hint:'التاء في أول الكلمة مثل: تـمساح 🐊'},
+ {q:'أي كلمة <b>تنتهي</b> بحرف التاء؟',opts:[{w:'تاج',pic:'crown'},{w:'حوت',pic:'whale'},{w:'تمر',pic:'dates'}],ans:'حوت',hint:'التاء في آخر الكلمة مثل: حوـت 🐋'}];
+const STAGE_META=[null,{t:'تشغيل الغواصة',s:'اختر حرف التاء من لوحة التحكم لتشغيل المحرك'},{t:'إطعام الأسماك',s:'أطعم الأسماك التي تحمل صوراً فيها حرف التاء'},{t:'بوابات البحر',s:'اختر البوابة الموافقة لموقع التاء في الكلمة'},{t:'كنز الأعماق',s:'حل ثلاثة تحديات لتكمل الخريطة وتفتح الكنز'}];
+const wordSpans=w=>w.split('').map(ch=>ch==='ت'?`<span class="taa">${ch}</span>`:ch).join('');
+
+/* ================= الصوت ================= */
+const MEL=[523,0,659,0,784,0,880,0,784,0,659,0,587,0,659,0,523,0,659,0,784,0,1047,0,880,0,784,0,659,0,523,0];
+const BASS=[131,0,0,0,0,0,0,0,98,0,0,0,0,0,0,0,110,0,0,0,0,0,0,0,87,0,0,0,0,0,0,0];
+const AudioEng={ctx:null,master:null,music:null,delay:null,nbuf:null,step:0,nextT:0,engine:null,engineGain:null,
+ init(){if(this.ctx)return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const c=this.ctx=new AC();const comp=c.createDynamicsCompressor();comp.connect(c.destination);
+  this.master=c.createGain();this.master.gain.value=S.sound?.9:0;this.master.connect(comp);
+  this.music=c.createGain();this.music.gain.value=.42;this.music.connect(this.master);
+  this.delay=c.createDelay(.8);this.delay.delayTime.value=.34;const fb=c.createGain();fb.gain.value=.32;const wet=c.createGain();wet.gain.value=.24;
+  this.delay.connect(fb);fb.connect(this.delay);this.delay.connect(wet);wet.connect(this.master);
+  this.nbuf=c.createBuffer(1,c.sampleRate,c.sampleRate);const nd=this.nbuf.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  const hb=c.createBuffer(1,c.sampleRate*2,c.sampleRate);const hd=hb.getChannelData(0);let l=0;
+  for(let i=0;i<hd.length;i++){l=(l+.02*(Math.random()*2-1))/1.02;hd[i]=l*3.5;}
+  const hs=c.createBufferSource();hs.buffer=hb;hs.loop=true;const hf=c.createBiquadFilter();hf.type='lowpass';hf.frequency.value=320;const hg=c.createGain();hg.gain.value=.05;
+  hs.connect(hf);hf.connect(hg);hg.connect(this.master);hs.start();
+  const lfo=c.createOscillator();lfo.frequency.value=.08;const lg=c.createGain();lg.gain.value=.02;lfo.connect(lg);lg.connect(hg.gain);lfo.start();
+  this.nextT=c.currentTime+.15;this.step=0;setInterval(()=>this.sched(),110);},
+ sched(){const c=this.ctx;if(!c||c.state!=='running')return;if(!S.sound){this.nextT=c.currentTime+.1;return;}
+  while(this.nextT<c.currentTime+.3){const i=this.step%32;
+   if(MEL[i])this.marimba(MEL[i],this.nextT,.12);
+   if(BASS[i])this.pad(BASS[i],this.nextT);
+   this.nextT+=.3;this.step++;}},
+ marimba(f,t,v){const c=this.ctx,o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain(),g2=c.createGain();
+  o.type='sine';o.frequency.value=f;o2.type='triangle';o2.frequency.value=f*2;g2.gain.value=.09;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+.7);
+  o.connect(g);o2.connect(g2);g2.connect(g);g.connect(this.music);g.connect(this.delay);o.start(t);o2.start(t);o.stop(t+.75);o2.stop(t+.75);},
+ pad(f,t){const c=this.ctx,o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain();
+  o.type='sine';o.frequency.value=f;o2.type='sine';o2.frequency.value=f*1.005;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.2);g.gain.exponentialRampToValueAtTime(.0001,t+1.4);
+  o.connect(g);o2.connect(g);g.connect(this.music);o.start(t);o2.start(t);o.stop(t+1.5);o2.stop(t+1.5);},
+ startEngine(){const c=this.ctx;if(!c||this.engine)return;
+  const o=c.createOscillator();o.type='triangle';o.frequency.value=58;
+  const o2=c.createOscillator();o2.type='sawtooth';o2.frequency.value=29;
+  const f=c.createBiquadFilter();f.type='lowpass';f.frequency.value=180;
+  const g=c.createGain();g.gain.value=0;
+  o.connect(f);o2.connect(f);f.connect(g);g.connect(this.master);
+  const lfo=c.createOscillator();lfo.frequency.value=5.5;const lg=c.createGain();lg.gain.value=.012;lfo.connect(lg);lg.connect(g.gain);
+  o.start();o2.start();lfo.start();g.gain.linearRampToValueAtTime(.035,c.currentTime+1.2);
+  this.engine={o,o2,lfo};this.engineGain=g;},
+ setOn(on){if(this.master&&this.ctx)this.master.gain.linearRampToValueAtTime(on?.9:0,this.ctx.currentTime+.15);}
+};
+function tone(f,o){o=o||{};const c=AudioEng.ctx;if(!c||!S.sound)return;const t=c.currentTime+(o.at||0),dur=o.dur||.2;
+ const os=c.createOscillator(),g=c.createGain();os.type=o.type||'sine';os.frequency.setValueAtTime(f,t);
+ if(o.slide)os.frequency.exponentialRampToValueAtTime(Math.max(40,f+o.slide),t+dur);
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(o.vol||.2,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ os.connect(g);g.connect(AudioEng.master);if(o.echo)g.connect(AudioEng.delay);os.start(t);os.stop(t+dur+.05);}
+function noiseFx(o){o=o||{};const c=AudioEng.ctx;if(!c||!S.sound||!AudioEng.nbuf)return;const t=c.currentTime+(o.at||0),dur=o.dur||.3;
+ const src=c.createBufferSource();src.buffer=AudioEng.nbuf;src.loop=true;const f=c.createBiquadFilter();f.type=o.ftype||'bandpass';f.frequency.setValueAtTime(o.f||1200,t);f.Q.value=o.q||1;
+ if(o.slide)f.frequency.exponentialRampToValueAtTime(Math.max(60,(o.f||1200)+o.slide),t+dur);
+ const g=c.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(o.vol||.12,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ src.connect(f);f.connect(g);g.connect(AudioEng.master);src.start(t);src.stop(t+dur+.05);}
+const sfx={
+ blip:()=>tone(680,{dur:.06,vol:.08}),
+ bubble:()=>{tone(420,{dur:.12,vol:.1,slide:520});noiseFx({dur:.08,vol:.04,f:2200});},
+ correct:()=>{tone(660,{dur:.12,vol:.15,echo:1});tone(990,{at:.09,dur:.24,vol:.13,echo:1});sfx.bubble();},
+ wrong:()=>{tone(392,{type:'triangle',dur:.18,vol:.12});tone(311,{type:'triangle',at:.16,dur:.3,vol:.12});},
+ feed:()=>{tone(900,{type:'square',dur:.04,vol:.07});tone(760,{type:'square',at:.07,dur:.04,vol:.07});tone(300,{at:.14,dur:.14,vol:.12,slide:-120});},
+ gate:()=>{noiseFx({dur:.5,vol:.1,f:400,slide:900,q:.7});[523,784,1047].forEach((f,i)=>tone(f,{at:.2+i*.09,dur:.35,vol:.13,echo:1}));},
+ pearl:()=>{tone(1320,{dur:.1,vol:.1,echo:1});tone(1760,{at:.07,dur:.2,vol:.08,echo:1});},
+ dive:()=>{tone(700,{dur:1.1,vol:.12,slide:-520});noiseFx({dur:1.2,vol:.08,f:900,slide:-600});},
+ sonar:()=>{tone(880,{dur:.5,vol:.09,echo:1});},
+ treasure:()=>{[523,659,784,1047,1319,1568].forEach((f,i)=>tone(f,{at:i*.1,dur:.6,vol:.15,echo:1}));noiseFx({dur:.9,vol:.05,f:4200,ftype:'highpass',at:.3});},
+ medal:()=>{sfx.treasure();[1047,1319,1568,2093].forEach((f,i)=>tone(f,{at:.8+i*.13,dur:.7,vol:.12,echo:1}));},
+ whoosh:()=>noiseFx({dur:.5,vol:.1,f:500,slide:1600}),
+ tick:()=>tone(1500,{dur:.04,vol:.04})
+};
+
+/* ================= الجسيمات ================= */
+const bg={cv:$('#bgcv'),cx:null,bubs:[],plank:[]};const fx={cv:$('#fxcv'),cx:null,ps:[]};
+function resize(){const d=Math.min(window.devicePixelRatio||1,2);[bg,fx].forEach(o=>{o.cv.width=Math.floor(innerWidth*d);o.cv.height=Math.floor(innerHeight*d);o.cv.style.width=innerWidth+'px';o.cv.style.height=innerHeight+'px';o.cx=o.cv.getContext('2d');o.cx.setTransform(d,0,0,d,0,0);});
+ bg.bubs=RM?[]:Array.from({length:34},()=>({x:rnd(0,innerWidth),y:rnd(0,innerHeight),r:rnd(2,7),v:rnd(14,42),ph:rnd(0,6.28),a:rnd(.12,.34)}));
+ bg.plank=RM?[]:Array.from({length:30},()=>({x:rnd(0,innerWidth),y:rnd(0,innerHeight),r:rnd(.8,2.2),v:rnd(3,10),a:rnd(.15,.45),ph:rnd(0,6.28),col:pick(['#35f0e0','#4dffd2','#ffe9a8','#ff9fcf'])}));}
+function fxBubbles(x,y,n){if(RM)n=Math.min(n,4);for(let i=0;i<n;i++){if(fx.ps.length>460)return;fx.ps.push({type:'bub',x:x+rnd(-14,14),y,vx:rnd(-24,24),vy:rnd(-90,-40),r:rnd(2.5,7),t:0,life:rnd(.9,1.6),ph:rnd(0,6.28)});}}
+function fxSpark(x,y,n,col){if(RM)n=Math.min(n,3);for(let i=0;i<n;i++){if(fx.ps.length>460)return;const a=rnd(0,6.28),sp=rnd(30,200);fx.ps.push({type:'spark',x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-40,r:rnd(1.5,3.5),t:0,life:rnd(.4,.8),col:col||pick(PAL)});}}
+function fxPearls(x,y,n){if(RM)n=Math.min(n,4);for(let i=0;i<n;i++){if(fx.ps.length>460)return;fx.ps.push({type:'pearl',x,y,vx:rnd(-230,230),vy:rnd(-420,-160),g:420,r:rnd(5,11),t:0,life:rnd(1.4,2.2)});}}
+function fxStars(x,y,n){if(RM)n=Math.min(n,4);for(let i=0;i<n;i++){if(fx.ps.length>460)return;fx.ps.push({type:'star',x,y,vx:rnd(-260,260),vy:rnd(-440,-140),g:380,r:rnd(7,14),rot:rnd(0,6.28),vr:rnd(-6,6),t:0,life:rnd(1.3,2.1)});}}
+function fxRain(){if(RM)return;for(let i=0;i<7;i++){if(fx.ps.length>460)return;
+ if(i%2)fx.ps.push({type:'pearl',x:rnd(0,innerWidth),y:-16,vx:rnd(-20,20),vy:rnd(70,130),g:26,r:rnd(5,10),t:0,life:rnd(2.6,4)});
+ else fx.ps.push({type:'star',x:rnd(0,innerWidth),y:-16,vx:rnd(-24,24),vy:rnd(60,120),g:22,r:rnd(7,12),rot:rnd(0,6.28),vr:rnd(-4,4),t:0,life:rnd(2.6,4)});}}
+function awardPearls(n,x,y){const box=$('#pearlsBox');if(!box)return;const r=box.getBoundingClientRect(),tx=r.left+r.width/2,ty=r.top+r.height/2;
+ for(let i=0;i<n;i++){const sx=x+rnd(-14,14),sy=y+rnd(-10,10),dx=tx-sx,dy=ty-sy,len=Math.hypot(dx,dy)||1;fx.ps.push({type:'home',sx,sy,px:-dy/len,py:dx/len,arc:rnd(-70,70),tx,ty,t:0,dur:.8,delay:i*.14,done:false});}}
+function pearlHUD(){$('#pearlCount').textContent=arNum(S.pearls);const b=$('#pearlsBox');b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');}
+const easeIO=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+function starPath(cx,x,y,r,rot){cx.beginPath();for(let i=0;i<10;i++){const a=rot-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;const px=x+Math.cos(a)*rr,py=y+Math.sin(a)*rr;i?cx.lineTo(px,py):cx.moveTo(px,py);}cx.closePath();}
+function drawBG(dt,t){const cx=bg.cx;if(!cx)return;cx.clearRect(0,0,innerWidth,innerHeight);
+ for(const b of bg.bubs){b.y-=b.v*dt;b.x+=Math.sin(t*.8+b.ph)*12*dt;if(b.y<-12){b.y=innerHeight+12;b.x=rnd(0,innerWidth);}
+  cx.globalAlpha=b.a;cx.strokeStyle='#dff6ff';cx.lineWidth=1.4;cx.beginPath();cx.arc(b.x,b.y,b.r,0,6.283);cx.stroke();
+  cx.globalAlpha=b.a*.5;cx.fillStyle='#fff';cx.beginPath();cx.arc(b.x-b.r*.3,b.y-b.r*.3,b.r*.3,0,6.283);cx.fill();}
+ for(const p of bg.plank){p.y-=p.v*dt;p.x+=Math.sin(t*.5+p.ph)*8*dt;if(p.y<-8){p.y=innerHeight+8;p.x=rnd(0,innerWidth);}
+  cx.globalAlpha=p.a*(.6+.4*Math.sin(t*2+p.ph));cx.fillStyle=p.col;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();}
+ cx.globalAlpha=1;}
+function drawFX(dt){const cx=fx.cx;if(!cx)return;cx.clearRect(0,0,innerWidth,innerHeight);
+ for(let i=fx.ps.length-1;i>=0;i--){const p=fx.ps[i];
+  if(p.type==='spark'){p.t+=dt;if(p.t>=p.life){fx.ps.splice(i,1);continue;}p.vy+=140*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;const a=1-p.t/p.life;cx.globalAlpha=a*.25;cx.fillStyle=p.col;cx.beginPath();cx.arc(p.x,p.y,p.r*2.4,0,6.283);cx.fill();cx.globalAlpha=a;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();}
+  else if(p.type==='bub'){p.t+=dt;if(p.t>=p.life){fx.ps.splice(i,1);continue;}p.x+=p.vx*dt+Math.sin(p.t*4+p.ph)*10*dt;p.y+=p.vy*dt;const a=1-p.t/p.life;cx.globalAlpha=a*.75;cx.strokeStyle='#dff6ff';cx.lineWidth=1.6;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.stroke();cx.globalAlpha=a*.4;cx.fillStyle='#fff';cx.beginPath();cx.arc(p.x-p.r*.3,p.y-p.r*.3,p.r*.3,0,6.283);cx.fill();}
+  else if(p.type==='pearl'){p.t+=dt;if(p.t>=p.life||p.y>innerHeight+30){fx.ps.splice(i,1);continue;}p.vy+=p.g*dt;p.vx*=.99;p.x+=p.vx*dt;p.y+=p.vy*dt;const a=Math.min(1,2*(1-p.t/p.life));cx.globalAlpha=a;cx.fillStyle='#fdfbff';cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();cx.strokeStyle='#b9c9d8';cx.lineWidth=1.2;cx.stroke();cx.fillStyle='#fff';cx.beginPath();cx.ellipse(p.x-p.r*.3,p.y-p.r*.35,p.r*.34,p.r*.24,-.5,0,6.283);cx.fill();}
+  else if(p.type==='star'){p.t+=dt;if(p.t>=p.life||p.y>innerHeight+30){fx.ps.splice(i,1);continue;}p.vy+=p.g*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.rot+=p.vr*dt;cx.globalAlpha=Math.min(1,2*(1-p.t/p.life));starPath(cx,p.x,p.y,p.r,p.rot);cx.fillStyle='#ffc23c';cx.fill();cx.strokeStyle='#c98a2e';cx.lineWidth=1.2;cx.stroke();}
+  else if(p.type==='home'){if(p.delay>0){p.delay-=dt;cx.globalAlpha=.85;cx.fillStyle='#fdfbff';cx.beginPath();cx.arc(p.sx,p.sy,5,0,6.283);cx.fill();continue;}
+   p.t+=dt/p.dur;if(p.t>=1){if(!p.done){p.done=true;S.pearls++;pearlHUD();sfx.tick();}fx.ps.splice(i,1);continue;}
+   const e=easeIO(Math.min(p.t,1)),bulge=Math.sin(e*Math.PI)*p.arc;const x=p.sx+(p.tx-p.sx)*e+p.px*bulge,y=p.sy+(p.ty-p.sy)*e+p.py*bulge;
+   cx.globalAlpha=.3;cx.fillStyle='#fdfbff';cx.beginPath();cx.arc(x,y,13,0,6.283);cx.fill();cx.globalAlpha=1;cx.beginPath();cx.arc(x,y,7,0,6.283);cx.fill();cx.strokeStyle='#b9c9d8';cx.lineWidth=1;cx.stroke();}}
+ cx.globalAlpha=1;}
+let rafId=null,lastT=0;
+function tick(now){rafId=requestAnimationFrame(tick);const dt=Math.min(.05,(now-lastT)/1000)||.016;lastT=now;drawBG(dt,now/1000);drawFX(dt);}
+function startLoop(){if(rafId==null){lastT=performance.now();rafId=requestAnimationFrame(tick);}}
+function stopLoop(){if(rafId!=null){cancelAnimationFrame(rafId);rafId=null;}}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopLoop();else{startLoop();if(AudioEng.ctx&&AudioEng.ctx.state==='suspended')AudioEng.ctx.resume();}});
+
+/* ================= الشعاب ================= */
+function buildReef(){
+ let s='<svg viewBox="0 0 1440 220" preserveAspectRatio="none">';
+ s+='<path d="M0 150 Q240 110 480 145 T960 135 T1440 155 L1440 220 L0 220 Z" fill="#0a3a52"/>';
+ s+='<path d="M0 185 Q300 155 640 182 T1100 175 T1440 190 L1440 220 L0 220 Z" fill="#062a3e"/>';
+ for(let i=0;i<16;i++){const x=20+i*92+rnd(-16,16),h=rnd(50,110),c=pick(['#0d6b52','#12805e','#0a5a46']);
+  s+=`<path d="M${x} 200 Q${x-16} ${200-h*.6} ${x+4} ${200-h} Q${x+22} ${200-h*.5} ${x+10} 200" fill="${c}" opacity=".85"/>`;}
+ for(let i=0;i<10;i++){const x=60+i*145+rnd(-20,20),c=pick(['#ff4f8b','#ffc23c','#35f0e0']);
+  s+=`<g opacity=".8"><circle cx="${x}" cy="192" r="9" fill="${c}"/><circle cx="${x-12}" cy="196" r="6" fill="${c}"/><circle cx="${x+12}" cy="196" r="6" fill="${c}"/></g>`;}
+ s+='</svg>';$('#reef').innerHTML=s;
+}
+function seaBubblesHTML(){let s='';for(let i=0;i<12;i++){const sz=rnd(5,13);s+=`<span class="sbub" style="left:${rnd(2,96)}%;width:${sz}px;height:${sz}px;animation-duration:${rnd(7,14)}s;animation-delay:${rnd(0,8)}s"></span>`;}return s;}
+const seafloorSVG=()=>`<svg viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 Q120 16 260 28 T520 24 T600 32 L600 56 L0 56 Z" fill="#d9c096" opacity=".55"/><path d="M0 40 Q160 28 320 40 T600 40 L600 56 L0 56 Z" fill="#f4e4c1" opacity=".45"/><g fill="#0d6b52" opacity=".8"><path d="M40 44 Q30 22 44 6 Q56 24 48 44 Z"/><path d="M540 44 Q530 20 546 4 Q558 24 548 44 Z"/></g><circle cx="120" cy="46" r="6" fill="#ff4f8b" opacity=".7"/><circle cx="470" cy="47" r="5" fill="#ffc23c" opacity=".7"/></svg>`;
+
+/* ================= توتو ================= */
+let moodTimer=null,talkTimer=null,lastSay=0;
+function setMood(m,dur){const r=$('#octo');if(!r)return;clearTimeout(moodTimer);r.dataset.mood=m;if(m!=='idle')moodTimer=setTimeout(()=>{r.dataset.mood='idle';},dur||(m==='cheer'?2600:1600));}
+function octoSay(text,mood,html){const b=$('#bubble'),r=$('#octo');if(!b)return;if(html)b.innerHTML=text;else b.textContent=text;
+ b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');lastSay=performance.now();
+ if(r){r.classList.add('talk');clearTimeout(talkTimer);talkTimer=setTimeout(()=>r.classList.remove('talk'),950);}setMood(mood||'happy');}
+function shakeStage(){const s=$('#stage');s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');}
+
+/* ================= HUD والعمق ================= */
+const PIP_LBL=['الغواصة','الأسماك','البوابات','الكنز'];
+function buildPips(){$('#pips').innerHTML=PIP_LBL.map((l,i)=>`<div class="pip"><span class="n">${arNum(i+1)}</span><span class="lbl">${l}</span></div>`).join('');}
+function updatePips(){$$('#pips .pip').forEach((p,i)=>{p.classList.toggle('done',S.done[i]);p.classList.toggle('active',S.stage===i+1&&!S.done[i]);p.querySelector('.n').textContent=S.done[i]?'✓':arNum(i+1);});}
+function updateSoundBtn(){const b=$('#soundBtn');b.innerHTML=(S.sound?sndOnSVG():sndOffSVG())+`<span class="lbl">${S.sound?'الصوت':'صامت'}</span>`;b.classList.toggle('muted',!S.sound);b.setAttribute('aria-pressed',String(S.sound));b.setAttribute('aria-label',S.sound?'كتم الصوت':'تشغيل الصوت');}
+let depthAnim=null;
+function setDepth(target,animate){
+ const from=S.depth;S.depth=target;
+ const rail=$('#railSub'),val=$('#railVal'),chip=$('#depthChip');
+ if(rail)rail.style.top=(target/1000*100)+'%';
+ clearInterval(depthAnim);
+ if(!animate||RM){if(val)val.textContent=arNum(target)+' م';if(chip)chip.textContent='🌊 العمق: '+arNum(target)+' م';return;}
+ let cur=from;const step=Math.max(1,Math.round((target-from)/40));
+ depthAnim=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(depthAnim);}
+  if(val)val.textContent=arNum(cur)+' م';if(chip)chip.textContent='🌊 العمق: '+arNum(cur)+' م';},40);
+}
+
+/* ================= قوالب ================= */
+const stageEl=$('#stage'),overlayEl=$('#overlay'),fxLayer=$('#fxLayer');
+const overlayOpen=()=>overlayEl.classList.contains('show');
+function stageHead(n,title,obj){return `<div class="stage-head"><span class="stage-chip">المرحلة ${arNum(n)} من ٤</span><h2 class="stage-title">${title}</h2><p class="stage-obj">${obj}</p><span class="target-chip">المطلوب: <b>ت</b> — نقطتان فوق الجسم</span></div>`;}
+function seaShell(n,inner,statusText){
+ const marks=[0,25,50,75,100].map(p=>`<span class="rail-mark" style="top:${p}%"></span>`).join('');
+ return `<div class="sea-row"><div class="sea" id="sea" data-depth="${n}">
+  <div class="caustics"></div><div class="sea-bubbles">${seaBubblesHTML()}</div>
+  <div class="sea-inner">
+    <div class="sea-top">
+      <div class="sub-wrap${S.powered?' powered':''}" id="subWrap">${submarineSVG()}
+        <div class="fish-perch fp1"></div><div class="fish-perch fp2"></div><div class="fish-perch fp3"></div><div class="fish-perch fp4"></div>
+      </div>
+      <div class="sub-status">
+        <div class="status-line"><span class="status-dot${S.powered?' on':''}" id="engineDot"></span><span id="engineTxt">${S.powered?'المحرك يعمل — الغواصة تغوص':'المحرك متوقف — بحاجة إلى حرف التاء'}</span></div>
+        <div class="status-line"><span class="sonar" id="sonar"></span><span>${statusText||'البحث عن كنز التاء مستمر...'}</span></div>
+        <span class="depth-chip" id="depthChip">🌊 العمق: ${arNum(S.depth)} م</span>
+      </div>
+    </div>
+    ${inner}
+  </div>
+  <div class="seafloor">${seafloorSVG()}</div>
+ </div>
+ <div class="depth-rail"><span class="rail-title">العمق</span><div class="rail-track">${marks}<div class="rail-sub" id="railSub">${submarineSVG(true)}</div></div><span class="rail-val" id="railVal">${arNum(S.depth)} م</span></div>
+ </div>`;
+}
+function stageDone(n,msg,btnLabel,cb){S.done[n-1]=true;updatePips();sfx.correct();
+ const sea=$('#sea');const c=sea?center(sea):{x:innerWidth/2,y:innerHeight/2};fxPearls(c.x,c.y-40,12);fxStars(c.x,c.y-40,10);
+ const card=document.createElement('div');card.className='done-card';card.innerHTML=`<p>🫧 ${msg}</p><button class="btn-primary">${btnLabel} ⬅</button>`;
+ card.querySelector('button').addEventListener('click',function(){this.disabled=true;sfx.blip();cb();});stageEl.appendChild(card);card.scrollIntoView({behavior:RM?'auto':'smooth',block:'nearest'});}
+function freshStage(){TOKEN++;S.busy=false;S.hintHandler=null;fxLayer.innerHTML='';}
+function powerSub(){S.powered=true;const w=$('#subWrap');if(w)w.classList.add('powered');
+ const d=$('#engineDot');if(d)d.classList.add('on');const t=$('#engineTxt');if(t)t.textContent='المحرك يعمل — الغواصة تغوص';
+ AudioEng.startEngine();}
+
+/* ================= المرحلة ١ ================= */
+function renderStage1(){
+ const keys=shuffle(PAD).map((l,i)=>`<div class="lkey" role="button" tabindex="0" data-letter="${l}" aria-label="حرف ${l}" style="animation:popIn .35s ${i*40}ms both">${l}</div>`).join('');
+ stageEl.innerHTML=stageHead(1,'تشغيل الغواصة','لوحة التحكم مليئة بالحروف! اضغط على حرف التاء (ت) لتشغيل المحرك والغوص في الأعماق.')+
+ seaShell(1,`<div class="console">
+   <div class="console-top"><span class="console-title">🎛️ لوحة تشغيل المحرك</span>
+     <span class="gauge"><span class="gauge-lbl">الطاقة</span><span class="gauge-bar"><span class="gauge-fill" id="gaugeFill"></span></span></span></div>
+   <div class="letter-pad" id="letterPad">${keys}</div>
+   <p class="console-note">التاء لها <b>نقطتان فوق</b> جسم مفتوح مثل القارب: ت</p>
+ </div>`,'الغواصة على السطح — بانتظار التشغيل');
+ setDepth(0,false);
+ S.hintHandler=()=>{const k=$$('#letterPad .lkey').find(el=>el.dataset.letter==='ت');
+  if(k){k.style.boxShadow='0 0 0 4px rgba(53,240,224,.85),0 5px 0 #8a5a14';later(1900,()=>{k.style.boxShadow='';});
+   octoSay('ابحث عن الحرف الذي يشبه قارباً صغيراً وفوقه نقطتان: ت! 🎛️','happy');}};
+ window._key=(el)=>{
+  if(S.busy||el.classList.contains('right'))return;
+  const l=el.dataset.letter;sfx.blip();
+  if(l==='ت'){
+   el.classList.add('right');S.busy=true;sfx.correct();
+   const gf=$('#gaugeFill');if(gf)gf.classList.add('full');
+   const c=center(el);fxSpark(c.x,c.y,14,'#35f0e0');awardPearls(3,c.x,c.y);
+   octoSay('التاء! المحرك يعمل الآن... استعد للغوص! 🌊','cheer');
+   later(900,()=>{powerSub();sfx.dive();const w=$('#subWrap');if(w){w.classList.add('diving');const sc=center(w);fxBubbles(sc.x-60,sc.y+20,16);}
+    setDepth(DEPTH[1],true);const sea=$('#sea');if(sea)sea.dataset.depth='2';});
+   later(3000,()=>stageDone(1,'الغواصة تعمل وغاصت إلى ٢٠٠ متر!','التالي: إطعام الأسماك',()=>showTransition(2)));
+  }else{
+   el.classList.add('wrong');setTimeout(()=>el.classList.remove('wrong'),470);
+   sfx.wrong();shakeStage();S.mistakes++;
+   octoSay(LETTER_HINT[l]||`هذا حرف «${l}» وليس التاء! ابحث عن نقطتين فوق الجسم 🔍`,'sad');
+  }
+ };
+ octoSay('أهلاً يا بحّار! الغواصة لا تعمل إلا بحرف التاء. اضغط عليه في اللوحة! 🎛️','idle');
+}
+
+/* ================= المرحلة ٢ ================= */
+function renderStage2(){
+ let fed=0;const total=FISHES.filter(f=>hasTaa(f.w)).length;
+ const school=shuffle(FISHES).map((f,i)=>{const c=FISH_COLORS[i%FISH_COLORS.length];
+  return `<div class="fish" role="button" tabindex="0" data-word="${f.w}" aria-label="سمكة تحمل ${f.w}" style="animation-delay:${i*70}ms">
+   <div class="fish-float" style="animation-delay:${rnd(0,3).toFixed(2)}s">${fishSVG(c[0],c[1])}<div class="fish-rope"></div>
+   <div class="fish-card">${PICS[f.pic]()}<div class="fish-word">${f.w}</div></div></div></div>`;}).join('');
+ stageEl.innerHTML=stageHead(2,'إطعام الأسماك','اضغط على السمكة التي تحمل صورة اسمها فيه حرف التاء — لتأكل وتسبح نحو الغواصة!')+
+ seaShell(2,`<div class="progress-row"><span class="progress-label">أسماك أطعمتها: <span id="s2Count">٠</span> / ${arNum(total)}</span></div>
+  <div class="fish-school" id="fishSchool">${school}</div>`,'الأسماك جائعة حول الغواصة');
+ setDepth(DEPTH[2],true);
+ S.hintHandler=()=>{const f=$$('#fishSchool .fish:not(.eaten)').find(el=>hasTaa(el.dataset.word));
+  if(f){f.style.filter='drop-shadow(0 0 14px rgba(255,194,60,.95))';later(1800,()=>{f.style.filter='';});
+   octoSay(`انظر إلى «${f.dataset.word}» — هل ترى حرف التاء في اسمها؟ 🐟`,'happy');}};
+ window._fish=(el)=>{
+  if(S.busy||el.classList.contains('eaten')||el.classList.contains('cool'))return;
+  const w=el.dataset.word;
+  if(!hasTaa(w)){el.classList.add('nope','cool');sfx.wrong();shakeStage();S.mistakes++;
+   const c=center(el);fxBubbles(c.x,c.y,8);
+   octoSay(FISH_HINT[w]||`«${w}» ليس فيها حرف التاء! جرّب سمكة أخرى 🐟`,'sad');
+   later(800,()=>el.classList.remove('nope','cool'));return;}
+  el.classList.add('eaten','cool');sfx.feed();
+  const sub=$('#subWrap'),fc=center(el),sc=sub?center(sub):fc;
+  const pellet=document.createElement('div');pellet.className='pellet';
+  pellet.style.left=(sc.x-7)+'px';pellet.style.top=(sc.y-7)+'px';fxLayer.appendChild(pellet);
+  const finishEat=()=>{
+   pellet.remove();sfx.bubble();fxBubbles(fc.x,fc.y,10);
+   const perch=$$('#subWrap .fish-perch')[fed];
+   const oldR=el.getBoundingClientRect();
+   if(perch){perch.appendChild(el);el.classList.add('perched');
+    const newR=el.getBoundingClientRect();
+    if(el.animate)el.animate([{transform:`translate(${oldR.left-newR.left}px,${oldR.top-newR.top}px) scale(1.5)`,opacity:1},{transform:'translate(0,0) scale(1)',opacity:1}],{duration:900,easing:'cubic-bezier(.35,1.2,.5,1)'});}
+   else el.remove();
+   fed++;const cnt=$('#s2Count');if(cnt)cnt.textContent=arNum(fed);
+   const pc=center(sub||el);awardPearls(2,pc.x,pc.y);fxSpark(pc.x,pc.y,10,'#ffc23c');sfx.pearl();
+   octoSay(pick(PRAISE)+` «${w}» فيها تاء — السمكة صديقتنا الآن! 🐟`,'happy');
+   if(fed===total){S.busy=true;later(1400,()=>stageDone(2,'أطعمت كل أسماك التاء وصارت ترافق الغواصة!','التالي: بوابات البحر',()=>showTransition(3)));}
+  };
+  if(pellet.animate){pellet.animate([{transform:'translate(0,0) scale(.6)'},{transform:`translate(${fc.x-sc.x}px,${fc.y-sc.y}px) scale(1.2)`}],{duration:520,easing:'cubic-bezier(.4,0,.6,1)'}).onfinish=finishEat;}
+  else setTimeout(finishEat,400);
+ };
+ octoSay('خمس أسماك جائعة! أطعم فقط من يحمل اسمها حرف التاء 🐟','idle');
+}
+
+/* ================= المرحلة ٣ ================= */
+function renderStage3(){
+ const order=shuffle(GATE_WORDS);let idx=0,solved=0;
+ const gates=[0,1,2].map(p=>`<div class="gate" role="button" tabindex="0" data-pos="${p}" aria-label="بوابة ${POS_NAME[p]}" style="animation-delay:${p*80}ms">${gateSVG()}<div class="gate-label"><b>${POS_NAME[p]}</b><span>${POS_FORM[p]}</span></div></div>`).join('');
+ stageEl.innerHTML=stageHead(3,'بوابات البحر','انظر أين تقع التاء في الكلمة، ثم اضغط على البوابة الصحيحة لتعبر الكلمة!')+
+ seaShell(3,`<div class="progress-row"><span class="progress-label">كلمات عبرت: <span id="s3Count">٠</span> / ${arNum(order.length)}</span></div>
+  <div class="word-float" id="wordFloat"></div><div class="gates" id="gates">${gates}</div>`,'ثلاث بوابات تفصلنا عن الأعماق');
+ setDepth(DEPTH[3],true);
+ function showWord(){
+  const it=order[idx];
+  $('#wordFloat').innerHTML=`<div class="word-card" id="wordCard">${PICS[it.pic]()}<div><span class="wtxt">${wordSpans(it.w)}</span><span class="wask">أين حرف التاء في هذه الكلمة؟</span></div></div>`;
+  sfx.bubble();
+ }
+ showWord();
+ S.hintHandler=()=>{const it=order[idx];const g=$$('#gates .gate')[it.pos];
+  if(g){g.classList.add('hintg');later(1900,()=>g.classList.remove('hintg'));}
+  octoSay(`في «${it.w}» التاء تقع في <span class="taa">${POS_NAME[it.pos]}</span> — انظر إلى الحرف الملوّن! 🌊`,'happy',true);};
+ window._gate=(g)=>{
+  if(S.busy||g.classList.contains('cool'))return;
+  const it=order[idx],p=+g.dataset.pos;
+  if(p!==it.pos){g.classList.add('nope','cool');sfx.wrong();shakeStage();S.mistakes++;
+   const correct=$$('#gates .gate')[it.pos];if(correct){correct.classList.add('hintg');later(1500,()=>correct.classList.remove('hintg'));}
+   octoSay(`التاء في «${it.w}» تقع في ${POS_NAME[it.pos]} (${POS_FORM[it.pos]}) — جرّب تلك البوابة! 🌊`,'sad');
+   later(700,()=>g.classList.remove('nope','cool'));return;}
+  S.busy=true;g.classList.add('open','cool');sfx.gate();
+  const card=$('#wordCard'),gc=center(g);
+  const pass=()=>{
+   if(card)card.remove();
+   fxBubbles(gc.x,gc.y-20,14);fxSpark(gc.x,gc.y-30,10,'#35f0e0');awardPearls(1,gc.x,gc.y-30);
+   solved++;idx++;const cnt=$('#s3Count');if(cnt)cnt.textContent=arNum(solved);
+   octoSay(pick(PRAISE)+` «${it.w}» عبرت بوابة ${POS_NAME[it.pos]}! 🚪`,'happy');
+   later(750,()=>{g.classList.remove('open','cool');
+    if(idx<order.length){showWord();S.busy=false;}
+    else{later(500,()=>stageDone(3,'عبرت كل الكلمات بواباتها الصحيحة!','التالي: كنز الأعماق',()=>showTransition(4)));}});
+  };
+  if(card&&card.animate){const cc=center(card);
+   card.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${gc.x-cc.x}px,${gc.y-cc.y}px) scale(.25)`,opacity:0}],{duration:700,easing:'cubic-bezier(.4,0,.5,1)'}).onfinish=pass;}
+  else setTimeout(pass,500);
+ };
+ octoSay('ثلاث بوابات: أول الكلمة، وسطها، آخرها. اختر البوابة الصحيحة لكل كلمة! 🚪','idle');
+}
+
+/* ================= المرحلة ٤ ================= */
+function renderStage4(){
+ let ci=0,solved=0;
+ const optsHTML=c=>shuffle(c.opts).map(o=>`<div class="ch-opt" role="button" tabindex="0" data-word="${o.w}" aria-label="${o.w}">${PICS[o.pic]()}<div class="cw">${o.w}</div></div>`).join('');
+ stageEl.innerHTML=stageHead(4,'كنز الأعماق','حل ثلاثة تحديات لتكمل خريطة الكنز... ثم يفتح الصندوق وتظهر اللآلئ والنجوم!')+
+ seaShell(4,`<div class="progress-row"><span class="progress-label">أجزاء الخريطة: <span id="s4Count">٠</span> / ٣</span></div>
+  <div class="treasure-wrap" id="treasureWrap">
+    <div class="map" id="map">${mapSVG()}<div class="map-title">خريطة كنز التاء</div><div class="map-pieces"><span class="mp-dot"></span><span class="mp-dot"></span><span class="mp-dot"></span></div></div>
+    <div class="challenge" id="challenge"><div class="ch-q" id="chQ"></div><div class="ch-opts" id="chOpts"></div></div>
+  </div>
+  <div class="chest-stage" id="chestStage"><div class="chest" id="chest">${chestSVG()}</div><div class="chest-msg">الكنز مفتوح! لآلئ ونجوم لأجل بطل التاء 💎⭐</div></div>`,'وصلنا إلى قاع البحر — ١٠٠٠ متر');
+ setDepth(DEPTH[4],true);
+ function showChallenge(){const c=CHALLENGES[ci];$('#chQ').innerHTML=`🗝️ التحدي ${arNum(ci+1)}: ${c.q}`;$('#chOpts').innerHTML=optsHTML(c);sfx.bubble();}
+ showChallenge();
+ S.hintHandler=()=>{const c=CHALLENGES[ci];const el=$$('#chOpts .ch-opt').find(o=>o.dataset.word===c.ans);
+  if(el){el.style.boxShadow='0 0 0 4px rgba(255,194,60,.9),0 4px 0 #8a5a14';later(1900,()=>{el.style.boxShadow='';});}
+  octoSay(c.hint,'happy');};
+ window._opt=(el)=>{
+  if(S.busy||el.classList.contains('cool')||el.classList.contains('right'))return;
+  const c=CHALLENGES[ci],w=el.dataset.word;
+  if(w!==c.ans){el.classList.add('wrong','cool');sfx.wrong();shakeStage();S.mistakes++;
+   octoSay(c.hint+` «${w}» ليست الإجابة الصحيحة.`,'sad');
+   later(800,()=>el.classList.remove('wrong','cool'));return;}
+  el.classList.add('right');sfx.pearl();sfx.correct();
+  const piece=$('.map .mp'+(ci+1)),q=$('.map .mq'+(ci+1));
+  if(piece)piece.classList.add('on');if(q)q.classList.add('off');
+  const dot=$$('.map-pieces .mp-dot')[ci];if(dot)dot.classList.add('on');
+  const mc=center($('#map'));fxSpark(mc.x,mc.y,12,'#ffc23c');awardPearls(3,mc.x,mc.y);
+  solved++;$('#s4Count').textContent=arNum(solved);
+  octoSay(pick(PRAISE)+` جزء الخريطة رقم ${arNum(solved)} ظهر! 🗺️`,'cheer');
+  ci++;
+  if(ci<CHALLENGES.length){S.busy=true;later(1200,()=>{showChallenge();S.busy=false;});}
+  else{S.busy=true;later(1200,openTreasure);}
+ };
+ function openTreasure(){
+  const wrap=$('#treasureWrap');if(wrap)wrap.style.display='none';
+  const cs=$('#chestStage');if(cs)cs.classList.add('on');
+  octoSay('الخريطة اكتملت! المكان المحدد بعلامة ✗... ها هو الصندوق! 💎','cheer');
+  sfx.whoosh();
+  later(900,()=>{
+   const chest=$('#chest');if(chest)chest.classList.add('open');
+   sfx.treasure();
+   const c=center(chest||cs);
+   fxPearls(c.x,c.y-30,26);fxStars(c.x,c.y-30,20);fxSpark(c.x,c.y-30,20,'#ffc23c');
+   awardPearls(5,c.x,c.y-40);
+   later(700,()=>{fxPearls(c.x,c.y-40,18);fxStars(c.x,c.y-40,14);});
+   octoSay('لآلئ ونجوم! أنت مستكشف الأعماق الحقيقي! 🦪⭐','cheer');
+   later(2600,()=>{S.done[3]=true;updatePips();showFinale();});
+  });
+ }
+ octoSay('وصلنا إلى القاع! حل التحديات الثلاثة لتكمل الخريطة وتفتح الكنز 🗺️','idle');
+}
+
+/* ================= الطبقات ================= */
+function showOverlay(html,cls,keepToken){if(!keepToken)TOKEN++;overlayEl.className='overlay show '+(cls||'');overlayEl.innerHTML=html;overlayEl.scrollTop=0;}
+function hideOverlay(){overlayEl.classList.remove('show');setTimeout(()=>{if(!overlayEl.classList.contains('show'))overlayEl.innerHTML='';},280);}
+function showIntro(){TOKEN++;S.screen='intro';
+ showOverlay(`<div class="intro-card">
+  <div class="intro-hero">${submarineSVG()}</div>
+  <h1 class="intro-title">غواصة التاء — كنز الأعماق</h1>
+  <div class="story"><div class="octo" data-mood="happy">${octoSVG()}</div>
+   <p>أهلاً يا بحّار! أنا الأخطبوط <b>توتو</b> 🐙 وصديقي الغوّاص <b>تامر</b> يقود الغواصة.<br>
+   في قاع البحر كنزٌ لا يُفتح إلا بحرف <b>التاء (ت)</b>!<br>
+   شغّل الغواصة، أطعم الأسماك، اعبر بوابات البحر، ثم أكمل الخريطة وافتح الكنز 💎</p></div>
+  <div class="chips"><span class="chip"><b>١</b> تشغيل الغواصة</span><span class="chip"><b>٢</b> إطعام الأسماك</span><span class="chip"><b>٣</b> بوابات البحر</span><span class="chip"><b>٤</b> كنز الأعماق</span></div>
+  <span class="chip skill-chip">🎯 المهارة: الربط بين الصور والكلمات وتحديد موقع الحرف</span>
+  <button class="btn-primary big" id="startBtn">🌊 هيا نغوص!</button>
+  <p class="tiny-note">🔊 أصوات البحر والمحرك والموسيقى — يمكنك كتمها من الزر في الأعلى</p>
+ </div>`,'',true);
+ $('#startBtn').addEventListener('click',()=>{AudioEng.init();if(AudioEng.ctx&&AudioEng.ctx.state==='suspended')AudioEng.ctx.resume();sfx.blip();showTransition(1);});}
+function showTransition(n){TOKEN++;S.stage=n;S.screen='stage';updatePips();const m=STAGE_META[n];sfx.whoosh();
+ showOverlay(`<div class="trans-card"><div class="trans-sub">${submarineSVG()}</div>
+  <div class="trans-num">المرحلة ${arNum(n)} من ٤</div><div class="trans-title">${m.t}</div>
+  <div class="trans-sub-txt">${m.s}</div><div class="trans-depth">🌊 العمق المستهدف: ${arNum(DEPTH[n])} متر</div></div>`,'trans',true);
+ later(1600,()=>{hideOverlay();renderStage(n);});}
+function renderStage(n){freshStage();window._key=null;window._fish=null;window._gate=null;window._opt=null;stageEl.innerHTML='';
+ if(n===1)renderStage1();else if(n===2)renderStage2();else if(n===3)renderStage3();else renderStage4();
+ window.scrollTo({top:0,behavior:'auto'});}
+function showFinale(){TOKEN++;S.screen='finale';sfx.medal();
+ const rank=S.mistakes<=2?'قبطان أعماق من الدرجة الأولى! 🥇':S.mistakes<=6?'غوّاص ماهر ومجتهد! 🥈':'غوّاص مثابر لا يستسلم! 🥉';
+ showOverlay(`<div class="finale-card">
+  <div class="octo" data-mood="cheer">${octoSVG()}</div>
+  ${medalSVG()}
+  <div class="name-banner" id="nameBanner">البحّار الصغير</div>
+  <h2 class="finale-title">فتحت كنز الأعماق! 💎</h2>
+  <div class="finale-rank">${rank}</div>
+  <div class="finale-pearls">🦪 × ${arNum(S.pearls)} لؤلؤة</div>
+  <div class="chips"><span class="chip">شغّلت الغواصة بالتاء ✓</span><span class="chip">أطعمت ٤ أسماك ✓</span><span class="chip">عبرت ٩ كلمات ✓</span><span class="chip">٣ تحديات للكنز ✓</span></div>
+  <input class="name-input" id="nameInput" type="text" maxlength="18" placeholder="اكتب اسم البحّار ليظهر على الوسام ✍️" aria-label="اسم البحّار">
+  <button class="btn-primary big" id="againBtn">🔁 رحلة جديدة</button>
+ </div>`,'finale',true);
+ fxPearls(innerWidth/2,innerHeight*.3,26);fxStars(innerWidth/2,innerHeight*.3,20);
+ const rain=()=>{if(S.screen!=='finale'||!overlayOpen())return;fxRain();later(430,rain);};later(400,rain);
+ $('#nameInput').addEventListener('input',function(){$('#nameBanner').textContent=this.value.trim()||'البحّار الصغير';});
+ $('#againBtn').addEventListener('click',()=>{sfx.blip();resetGame();});}
+function showConfirm(){sfx.blip();
+ showOverlay(`<div class="confirm-card"><h3>هل نبدأ رحلة جديدة؟ 🔄</h3><p>ستعود الغواصة إلى السطح وتضيع لآلئك الحالية!</p>
+  <div class="confirm-btns"><button class="btn-primary" id="yesBtn">نعم، رحلة جديدة!</button><button class="btn-plain" id="noBtn">لا، أكمل الغوص ▶</button></div></div>`,'',true);
+ $('#yesBtn').addEventListener('click',resetGame);$('#noBtn').addEventListener('click',()=>{sfx.blip();hideOverlay();});}
+function resetGame(){TOKEN++;S.screen='intro';S.stage=0;S.pearls=0;S.mistakes=0;S.busy=false;S.powered=false;S.depth=0;
+ S.done=[false,false,false,false];fx.ps.length=0;fxLayer.innerHTML='';clearInterval(depthAnim);
+ if(AudioEng.engineGain&&AudioEng.ctx)AudioEng.engineGain.gain.linearRampToValueAtTime(0,AudioEng.ctx.currentTime+.4);
+ window._key=null;window._fish=null;window._gate=null;window._opt=null;
+ updatePips();pearlHUD();stageEl.innerHTML='';hideOverlay();showIntro();
+ octoSay('رحلة جديدة! هيا نغوص من أجل الكنز مرة أخرى 🌊','happy');}
+
+/* ================= محيط حي ================= */
+let ambTick=0;
+setInterval(()=>{if(document.hidden)return;ambTick++;
+ const son=$('#sonar');
+ if(son&&S.screen==='stage'){son.classList.remove('ping');void son.offsetWidth;son.classList.add('ping');if(!overlayOpen())sfx.sonar();}
+ if(S.powered&&S.screen==='stage'&&!overlayOpen()){const w=$('#subWrap');if(w){const c=center(w);fxBubbles(c.x-w.offsetWidth*.38,c.y+10,2);}}
+ if(ambTick%3===0&&S.screen==='stage'&&!S.busy&&!overlayOpen()&&performance.now()-lastSay>15000){
+  octoSay(pick(['التاء لها نقطتان فوق جسم مفتوح: ت 🫧','انظر إلى الصورة ثم اقرأ اسمها بهدوء 🐙','أول الكلمة... وسطها... آخرها — أين التاء؟','كل لؤلؤة تقرّبنا من الكنز! 🦪']),'idle');}
+},5200);
+
+/* ================= الأحداث والتهيئة ================= */
+stageEl.addEventListener('click',e=>{
+ if(S.busy&&!e.target.closest('.done-card'))return;
+ if(overlayOpen())return;
+ const k=e.target.closest('.lkey');if(k&&window._key){window._key(k);return;}
+ const f=e.target.closest('.fish');if(f&&window._fish&&!f.classList.contains('perched')){window._fish(f);return;}
+ const g=e.target.closest('.gate');if(g&&window._gate){window._gate(g);return;}
+ const o=e.target.closest('.ch-opt');if(o&&window._opt){window._opt(o);return;}
+});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[role=button]')){e.preventDefault();e.target.click();}});
+$('#logoSub').innerHTML=submarineSVG(true);
+$('#pearlIco').innerHTML=pearlSVG();
+$('#octo').innerHTML=octoSVG();
+$('#restartBtn').innerHTML=restartSVG()+'<span class="lbl">رحلة جديدة</span>';
+buildReef();buildPips();updatePips();updateSoundBtn();pearlHUD();
+resize();window.addEventListener('resize',resize);startLoop();
+document.addEventListener('pointerdown',()=>{AudioEng.init();if(AudioEng.ctx&&AudioEng.ctx.state==='suspended')AudioEng.ctx.resume();if(S.powered)AudioEng.startEngine();},{capture:true});
+$('#soundBtn').addEventListener('click',()=>{S.sound=!S.sound;try{localStorage.setItem('sub-taa-sound',S.sound?'1':'0');}catch(e){}AudioEng.init();AudioEng.setOn(S.sound);updateSoundBtn();if(S.sound)sfx.blip();});
+$('#restartBtn').addEventListener('click',()=>{if(S.screen==='intro')return;showConfirm();});
+$('#hintBtn').addEventListener('click',()=>{if(S.busy||overlayOpen()||S.screen!=='stage')return;if(S.hintHandler)S.hintHandler();else octoSay('ابحث عن حرف التاء يا بحّار! 🐙','idle');});
+showIntro();octoSay('أهلاً! أنا الأخطبوط توتو 🐙 لنغوص معاً بحثاً عن كنز التاء!','happy');
+})();
+</script>
+</body>
+</html>
